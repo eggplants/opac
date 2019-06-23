@@ -122,7 +122,9 @@ SQL
 end
 #ページリンクの生成
 def create_paging_link(hits,par)
-  par["ps"][0]=20 if par["ps"][0]==""
+  par["ps"]=["20"] if par["ps"]==[""]
+  # par["ps"]||=["20"]
+  # par["ps"]=["20"] if par["ps"][0].to_i<0
   p_now,p_size,hits=par["p"][0].to_i,par["ps"][0].to_i,hits.to_i
   begin
   hmp=hits%p_size!=0&&hits!=0? (hits/p_size)+1 : hits/p_size

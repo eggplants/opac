@@ -21,6 +21,7 @@ search_display=makewords(cgi).join(" ").gsub(/[A-Z]+:[A-Z]+:/,"").sub(/^[ ]+/,""
 puts <<-EOS
 Content-type: text/html
 
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
