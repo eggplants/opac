@@ -6,11 +6,11 @@
 このページは,知識情報・図書館学類春ABモジュール開設「[**知識情報演習Ⅰ**](http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I)」の課題「OPACの構築」についてのレポートです.
 # 内容
 
-[1. 構築したOPACのURL](#1)
-[2. CGIプログラムのソースリストとその説明](#2)
-[3. リレーション(テーブル)の構造とその説明](#3)
-[4. 工夫した点](#4)
-[5. 得られた知見](#5)
+- [1. 構築したOPACのURL](#1)
+- [2. CGIプログラムのソースリストとその説明](#2)
+- [3. リレーション(テーブル)の構造とその説明](#3)
+- [4. 工夫した点](#4)
+- [5. 得られた知見](#5)
 # 1. <a name="1">構築したOPACのURL</a>
 
 構築したOPACシステム「**Simple OPAC**」のindexページは,
@@ -73,7 +73,7 @@ W:.
     - [opac/cgi/search.cgi](https://cgi.u.tsukuba.ac.jp/~s1811528/opac/cgi/search.cgi)
   - ソースコード
     - [github](https://github.com/eggplants/simple_opac/blob/master/cgi/search.cgi)
-<br>
+    
 - **accurate.cgi**
     - ページリンク
       - [opac/cgi/accurate.cgi](https://cgi.u.tsukuba.ac.jp/~s1811528/opac/cgi/accurate.cgi)
@@ -82,7 +82,7 @@ W:.
 
 ## 説明
 
-###search.cgi(各関数はdef.rbに記述)
+### search.cgi(各関数はdef.rbに記述)
 - makeword(cgi)
   - index.htmlからGETしたデータを検索語の分別がしやすいように加工するもの
   - \<field>:\<value>の形
