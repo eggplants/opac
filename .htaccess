@@ -1,0 +1,7 @@
+Order deny,allow
+Deny from all
+Allow from 133.51.0.0/16
+Allow from 130.158.0.0/16
+<Files *.html>
+ForceType "text/html; charset=utf-8"
+</Files>
