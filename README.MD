@@ -1,15 +1,9 @@
 # 知識情報演習I レポート課題
 
 ## 201811528 春名航亨(水曜組)
-
----
-
 # はじめに
 
 このページは,知識情報・図書館学類春ABモジュール開設「[**知識情報演習Ⅰ**](http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I)」の課題「OPACの構築」についてのレポートです.
-
----
-
 # 内容
 
 [1. 構築したOPACのURL](#1)
@@ -17,9 +11,6 @@
 [3. リレーション(テーブル)の構造とその説明](#3)
 [4. 工夫した点](#4)
 [5. 得られた知見](#5)
-
----
-
 # 1. <a name="1">構築したOPACのURL</a>
 
 構築したOPACシステム「**Simple OPAC**」のindexページは,
@@ -72,8 +63,6 @@ W:.
         report.md...report.htmlの雛型
 ```
 <div style="text-align:center;">▲図1, OPACシステムの階層構造</div>
-
----
 
 # 2. <a name="2">CGIプログラムのソースリストとその説明</a>
 
@@ -171,9 +160,6 @@ W:.
   - rowにfield_search_a(key,db)[0]でsearch.cgiから渡されたGET値(NBC)から取得した全てのフィールドの書誌データ
   - row[1].scan(/[0-9]/).join[0,10]で,ISBNフィールドの数字のみを先頭から10桁とって,rowと一緒にisbnto13に渡しrowと一緒にisbnto13に渡して画像表示htmlを呼んでいる
   - 各項目をtableにして表示している
-
----
-
 # 3. <a name="3">リレーション(テーブル)の構造とその説明</a>
 
 ## 構造
@@ -251,9 +237,6 @@ CREATE TABLE bibdata(
 *複数値を持つ可能性があるフィールドは,挿入する値を結合して挿入しました.
 *正規化も何も行っていないので反省したいです.
 *常に一意な値になるのはNBCのみ(TITLEやHOLDINGLOCは一意でない)なのでprimary keyに指定しました.
-
----
-
 # 4. <a name="4">工夫した点</a>
 
 ## AND/OR検索に対応
@@ -280,8 +263,6 @@ CREATE TABLE bibdata(
 ## HTMLとCSSのバリデーション/標準化
 
 - HTML文書は基本エラーが出ないので,形式や継承関係,階層構造に問題がないか,HTMLタグ内にCSSに書くべき内容を含んでいないかを確認するため,W3CのValidator([HTML](http://validator.w3.org/)/[CSS](https://jigsaw.w3.org/css-validator/))を用いて標準化を行いました.
-
----
 
 # 5. <a name="5">得られた知見</a>
 
