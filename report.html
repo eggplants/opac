@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <title>知識情報演習I レポート課題</title>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="description" content="OPAC検索レポート.">
+      <meta name="keywords" content="OPAC,シンプル,使いやすい,簡単,筑波大学">
+      <meta name="author" content="春名航亨">
+      <meta name="generator" content="atom">
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@egpl0" />
+      <meta property="og:url" content="https://cgi.u.tsukuba.ac.jp/~s1811528/opac/report.html" />
+      <meta property="og:title" content="simple OPAC" />
+      <meta property="og:description" content="シンプルなOPAC検索システム." />
+      <meta property="og:image" content="./icon.png" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@egpl0" />
+      <link rel="shortcut icon" href="img/icon.png" >
+      <link rel="stylesheet" type="text/css" href="css/report.css">
+  </head>
+  <body class="markdown-preview-plus-view">
+    <h1>知識情報演習I レポート課題</h1>
+<h2>201811528 春名航亨(水曜組)</h2>
+<hr>
+<h1>はじめに</h1>
+<p>このページは,知識情報・図書館学類春ABモジュール開設「<a href="http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I"><strong>知識情報演習Ⅰ</strong></a>」の課題「OPACの構築」についてのレポートです.</p>
+<hr>
+<h1>内容</h1>
+<p><a href="#1">1. 構築したOPACのURL</a><br>
+<a href="#2">2. CGIプログラムのソースリストとその説明</a><br>
+<a href="#3">3. リレーション(テーブル)の構造とその説明</a><br>
+<a href="#4">4. 工夫した点</a><br>
+<a href="#5">5. 得られた知見</a></p>
+<hr>
+<h1>1. <a name="1">構築したOPACのURL</a></h1>
+<p>構築したOPACシステム「<strong>Simple OPAC</strong>」のindexページは,<br>
+<a href="https://cgi.u.tsukuba.ac.jp/~s1811528/opac/index.html"><strong>https://cgi.u.tsukuba.ac.jp/~s1811528/opac/index.html</strong></a>です.</p>
+<p>以下は,<strong>opacディレクトリ以下の階層構造</strong>と,<strong>各ファイルの説明</strong>をまとめた図です.</p>
+<pre class="editor-colors lang-cmd"><span class="syntax--text syntax--plain syntax--null-grammar"><span></span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>W:\wwws\cgi-bin\opac&gt;tree /F</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>フォルダー パスの一覧:  ボリューム vol_home01</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>ボリューム シリアル番号は 000000FB 8082:1532 です</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>W:.</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│  .htaccess...ユーザのサーバ設定ファイル</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│  report.html...レポートページ</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│  index.html...トップページ</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│  sitemap.xml...サイトの構造文書</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│  yet_list.html...未実装/実装したい機能のメモ</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>├─data</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      bib_sche.sql...opac.dbスキーマ</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      kakou.rb...jbisc.txtをcsvに成形するプログラム</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      isbn.txt...isbn(10桁)を抽出したもの</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      jbisc.txt...書誌情報の元データ</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      kd.csv...DBにimportできる形式にしたもの</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      opac.db...書誌データベース</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>├─css</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      index.css...index.htmlのCSS</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      search.css...search.cgi</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      accurate.css...accurate.cgi</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      yet_list.css...yet_list.html</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      report.css...report.html</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>├─img</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      icon.png...ページicon</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      notfound.png...書誌画像がnullの時表示される画像</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      requirement.png...要件のスクリーンショット</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>├─cgi</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      accurate.cgi...書誌の詳細表示ページ</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      search.cgi...検索結果一覧ページ</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      def.rb...上記2つのcgi内で用いる関数を集めたもの</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>└─md</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>        yet_list.md...yet_list.htmlの雛型</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>        report.md...report.htmlの雛型</span></span>
+</pre>
+<h2><div style="text-align:center;">▲図1, OPACシステムの階層構造</div></h2>
+<hr>
+<h1>2. <a name="2">CGIプログラムのソースリストとその説明</a></h1>
+<h2>ソースリスト</h2>
+<p>以下は,作成したcgiプログラムの<strong>ページ</strong>と<strong>ソースコード</strong>のリストです.</p>
+<ul>
+<li><strong>search.cgi</strong>
+<ul>
+<li>ページリンク
+<ul>
+<li><a href="https://cgi.u.tsukuba.ac.jp/~s1811528/opac/cgi/search.cgi">opac/cgi/search.cgi</a></li>
+</ul>
+</li>
+<li>ソースコード
+<ul>
+<li><a href="https://github.com/eggplants/simple_opac/blob/master/cgi/search.cgi">github</a><br>
+<br></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>accurate.cgi</strong>
+<ul>
+<li>ページリンク
+<ul>
+<li><a href="https://cgi.u.tsukuba.ac.jp/~s1811528/opac/cgi/accurate.cgi">opac/cgi/accurate.cgi</a></li>
+</ul>
+</li>
+<li>ソースコード
+<ul>
+<li><a href="https://github.com/eggplants/simple_opac/blob/master/cgi/accurate.cgi">github</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>説明</h2>
+<h3>search.cgi(各関数はdef.rbに記述)</h3>
+<ul>
+<li>makeword(cgi)
+<ul>
+<li>index.htmlからGETしたデータを検索語の分別がしやすいように加工するもの</li>
+<li>&lt;field&gt;:&lt;value&gt;の形</li>
+<li>gsub(/[\r\n]/,"")で,変数word内の改行を削除している</li>
+<li>delete_if{|i|…}はAND,andやnullの項目を削除している</li>
+<li>返り値は加工した検索文</li>
+</ul>
+</li>
+<li>makekeys(words)
+<ul>
+<li>makeword()から受け取った検索文を,SQLクエリに投げるための各キーワードに分割し,配列に挿入する</li>
+<li>or,ORが来たらそのまま挿入</li>
+<li>TITLE:<val>やED:<val>が来たら{“TITLE”=&gt;“val”}などのハッシュにして挿入</val></val></li>
+<li>フィールドの指定がないものが来たらそのまま挿入</li>
+<li>返り値はハッシュや文字列が格納された配列</li>
+</ul>
+</li>
+<li>all_any_search(key,db)
+<ul>
+<li>ANY検索(全てのフィールドから検索)を行い,DBからデータを取得する</li>
+<li>返り値はヒットしたデータのNBC(全国書誌番号)が格納された2次元配列[[NBC1],[NBC2],…,[NBCn]]</li>
+</ul>
+</li>
+<li>field_search_s(key,db)
+<ul>
+<li>指定したフィールドの個別検索を行う</li>
+<li>返り値はヒットしたデータのNBC(全国書誌番号)が格納された2次元配列</li>
+</ul>
+</li>
+<li>andor(keys,db)
+<ul>
+<li>makekeys()から受け取った値をイテレートして,all_any_search(),all_any_search()にそれぞれ適切に渡し検索結果を配列に挿入</li>
+<li>or,ORが渡されたらそのまま配列に挿入</li>
+<li>返り値は返り値はヒットしたデータのNBC(全国書誌番号)が格納された2次元配列</li>
+</ul>
+</li>
+<li>strinterpret(keys)
+<ul>
+<li>andor(keys,db)の返り値のORやANDを解釈して最終的な検索結果を作る</li>
+<li>[DATAn]の次に[DATAn+1]が来たら和集合([DATAn]|[DATAn+1])をとる</li>
+<li>[DATAn]の次にor,ORが来たらその次の[DATAn+1]と積集合([DATAn]&amp;[DATAn+1])をとる</li>
+<li>返り値は一次元配列</li>
+</ul>
+</li>
+<li>retr_hitdata(hit,db)
+<ul>
+<li>strinterpret(keys)で作成した,ヒットした書誌データのNBCから完全な書誌フィールドのデータを取得</li>
+<li>返り値はヒットした書誌データの全体</li>
+</ul>
+</li>
+<li>create_paging_link(hits,par)
+<ul>
+<li>ページネイション機能のためのページリンクの生成</li>
+<li>indexページやsearch.cgiから受け取ったps(pagesize)の値が空なら20に設定する</li>
+<li>p(page)は今いるページ数の値</li>
+<li>hmpに,検索件数とpsを考慮して必要なページ数(=ページリンクの数)を代入</li>
+<li>p_size=0ならhmp=0</li>
+<li>pagelinksにページリンクを挿入</li>
+<li>返り値はtableにしたページリンクのhtml</li>
+</ul>
+</li>
+<li>create_table_html(data,par)
+<ul>
+<li>検索結果をhtmlのtableに成型</li>
+<li>accurate.cgiにNBCを送信するために各TITLEにはリンクを付与する</li>
+<li>pとpsを考慮して必要な文をdata(=retr_hitdata(hit,db))から切り出す</li>
+<li>返り値はtableのhtml</li>
+</ul>
+</li>
+<li>rep_hide(per)
+<ul>
+<li>GETの値を,psを変更して再読み込みした時のために引継/保存しておく</li>
+<li>&lt;input type=“hidden”&gt;に埋め込んでおく</li>
+<li>返り値はps以外のGET値を埋め込んだ&lt;input type=“hidden”&gt;のhtml</li>
+</ul>
+</li>
+<li>main()(#main()とsearch.cgi内に書いている部分)
+<ul>
+<li>各関数の実行部分</li>
+<li>db,cgiでそれぞれSQLiteモジュールのDatabaseオブジェクトとしてopac.dbを指定したものと,CGIオブジェクトを持っておく</li>
+<li>cgi_valuesにはcgi.instance_variable_get(:@params)で全てのGET値を持っておく</li>
+<li>begin~rescue~endでは,検索フォームになにも記入されていないときのエラーを回避している</li>
+<li>hit_numは,ヒット件数を代入</li>
+<li>search_displayには検索ワードを持っておく</li>
+<li>hit_numが0の時は,pagenationと結果tableのheading表示をしない</li>
+<li>title要素と&lt;h1 /&gt;のなかで検索ワードを変えて表示</li>
+<li>rep_hideを「再読み込みする」をクリックした時(か,psの入力フォームでEnterした時)に送信する</li>
+</ul>
+</li>
+</ul>
+<h3>accurate.cgi(各関数はdef.rbに記述)</h3>
+<ul>
+<li>isbnto13(isbn10)
+<ul>
+<li><a href="https://openbd.jp/">openDB</a>をたたくためにISBNを10桁から13桁に変換する</li>
+<li>返り値はString(13桁の数字)</li>
+</ul>
+</li>
+<li>field_search_a(key,db)
+<ul>
+<li>search.cgiからNBCを受け取って書誌データ全体を取得</li>
+<li>返り値は1冊の全体の書誌データが入った配列</li>
+</ul>
+</li>
+<li>bibimage(isbn13,per)
+<ul>
+<li>書影画像の取得</li>
+<li>openDBの<a href="http://api.openbd.jp/v1/">エンドポイント</a>にアクセスして,書誌データがあるか(=画像があるか)確認</li>
+<li>JSONがnilならbibhashに404画像表示htmlを渡す</li>
+<li>JSONがnilでなければbibhashに書影表示htmlを渡す</li>
+<li>返り値は&lt;img … /&gt;のhtml</li>
+</ul>
+</li>
+<li>main()(#main()とaccurate.cgi内に書いている部分)
+<ul>
+<li>db,cgiでそれぞれSQLiteモジュールのDatabaseオブジェクトとしてopac.dbを指定したものと,CGIオブジェクトを持っておく</li>
+<li>rowにfield_search_a(key,db)[0]でsearch.cgiから渡されたGET値(NBC)から取得した全てのフィールドの書誌データ</li>
+<li>row[1].scan(/[0-9]/).join[0,10]で,ISBNフィールドの数字のみを先頭から10桁とって,rowと一緒にisbnto13に渡しrowと一緒にisbnto13に渡して画像表示htmlを呼んでいる</li>
+<li>各項目をtableにして表示している</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1>3. <a name="3">リレーション(テーブル)の構造とその説明</a></h1>
+<h2>構造</h2>
+<p>以下に、opac.dbにテーブルbibdataを作成した際のSQL(data/bib_sche.sql)を示します。</p>
+<pre class="editor-colors lang-sql"><span class="syntax--source syntax--sql"><span class="syntax--meta syntax--create syntax--sql"><span class="syntax--keyword syntax--other syntax--create syntax--sql"><span>CREATE</span></span><span> </span><span class="syntax--keyword syntax--other syntax--sql"><span>TABLE</span></span><span> </span><span class="syntax--entity syntax--name syntax--function syntax--sql"><span>bibdata</span></span></span><span>(</span></span>
+<span class="syntax--source syntax--sql"><span>    NBC </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span> </span><span class="syntax--storage syntax--modifier syntax--sql"><span>primary key</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    ISBN </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    TITLE </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    AUTH </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    PUB </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    PUBDATE </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    ED </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    PHYS </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    SERIES </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    NOTE </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    TITLEHEADING </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    AUTHORHEADING </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    HOLDINGSRECORD </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    HOLDINGPHYS </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>,</span></span>
+<span class="syntax--source syntax--sql"><span>    HOLDINGLOC </span><span class="syntax--storage syntax--type syntax--sql"><span>TEXT</span></span><span>);</span></span>
+</pre>
+<h2><div style="text-align:center;">▲図2, テーブルbibdataを作成するSQL</div></h2>
+<h2>説明</h2>
+<p>各値について説明します。</p>
+<ul>
+<li>NBC
+<ul>
+<li>全国書誌番号</li>
+<li>ex)JP20564340</li>
+</ul>
+</li>
+<li>ISBN
+<ul>
+<li>ISBN番号(10桁)</li>
+<li>ex)4-86004-040-6</li>
+</ul>
+</li>
+<li>TITLE
+<ul>
+<li>タイトル</li>
+<li>ex)先生と生徒の交友物語</li>
+</ul>
+</li>
+<li>AUTH
+<ul>
+<li>著者</li>
+<li>ex)大森正男著</li>
+</ul>
+</li>
+<li>PUB
+<ul>
+<li>出版・頒布</li>
+<li>ex)土浦筑波書林</li>
+</ul>
+</li>
+<li>PUBDATE
+<ul>
+<li>出版年</li>
+<li>ex)2004.1</li>
+</ul>
+</li>
+<li>ED
+<ul>
+<li>版</li>
+<li>ex)第1次改訂</li>
+</ul>
+</li>
+<li>PHYS
+<ul>
+<li>形態</li>
+<li>ex)248p;19cm</li>
+</ul>
+</li>
+<li>SERIES
+<ul>
+<li>シリーズ</li>
+<li>ex)Kobunshapaperbacks;41</li>
+</ul>
+</li>
+<li>NOTE
+<ul>
+<li>注記</li>
+<li>ex)奥付のタイトル(誤植)教師と生徒の交友物語</li>
+</ul>
+</li>
+<li>TITLEHEADING
+<ul>
+<li>タイトルの読み</li>
+<li>ex)センセイトセイトノコウユウモノガタリ</li>
+</ul>
+</li>
+<li>AUTHORHEADING
+<ul>
+<li>著者の読み</li>
+<li>ex)オオモリ,マサオ(大森,正男)</li>
+</ul>
+</li>
+<li>HOLDINGSRECORD
+<ul>
+<li>個別資料の識別番号</li>
+<li>ex)JP20564340-01</li>
+</ul>
+</li>
+<li>HOLDINGPHYS
+<ul>
+<li>所在棚名</li>
+<li>ex)21世紀に向うアフリカ連合</li>
+</ul>
+</li>
+<li>HOLDINGLOC
+<ul>
+<li>分類番号</li>
+<li>ex)F9-128</li>
+</ul>
+</li>
+</ul>
+<p>*複数値を持つ可能性があるフィールドは、挿入する値を結合して挿入しました。<br>
+*正規化も何も行っていないので反省したいです。<br>
+*常に一意な値になるのはNBCのみ(TITLEやHOLDINGLOCは一意でない)なのでprimary keyに指定しました。</p>
+<hr>
+<h1>4. <a name="4">工夫した点</a></h1>
+<h2>AND/OR検索に対応</h2>
+<h2>ページングの件数を選択/入力で指定</h2>
+<h2>検索窓でフィールド指定検索</h2>
+<h2>デザイン</h2>
+<h2>サイトの階層構造のサイトマップ作成</h2>
+<h2>メタタグの記述</h2>
+<h1>5. <a name="5">得られた知見</a></h1>
+<h2>サーバーサイドシステムの構築</h2>
+<h2>動的なWebページの作成</h2>
+<h2>Webページのスタイルシートを用いたデザイン</h2>
+<h2>構造化文書の作成</h2>
+<h2>SQLiteを用いたDB構築</h2>
+  </body>
+</html>
