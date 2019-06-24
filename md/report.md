@@ -1,19 +1,19 @@
-#知識情報演習I レポート課題
-##201811528 春名航亨(水曜組)
----
-#はじめに
+# 知識情報演習I レポート課題 201811528 春名航亨(水曜組)
+
+# はじめに
+
 このページは,知識情報・図書館学類春ABモジュール開設「[**知識情報演習Ⅰ**](http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I)」の課題「OPACの構築」についてのレポートです.
+# 内容
 
----
-#内容
-[1. 構築したOPACのURL](#1)
-[2. CGIプログラムのソースリストとその説明](#2)
-[3. リレーション(テーブル)の構造とその説明](#3)
-[4. 工夫した点](#4)
-[5. 得られた知見](#5)
+- [1. 構築したOPACのURL](#1)
+- [2. CGIプログラムのソースリストとその説明](#2)
+- [3. リレーション(テーブル)の構造とその説明](#3)
+- [4. 工夫した点](#4)
+- [5. 得られた知見](#5)
+- [6. 感想](#6)
 
----
-#1. <a name="1">構築したOPACのURL</a>
+# 1. <a name="1">構築したOPACのURL</a>
+
 構築したOPACシステム「**Simple OPAC**」のindexページは,
 [**https://cgi.u.tsukuba.ac.jp/~s1811528/opac/index.html**](https://cgi.u.tsukuba.ac.jp/~s1811528/opac/index.html)です.
 
@@ -65,24 +65,25 @@ W:.
 ```
 <div style="text-align:center;">▲図1, OPACシステムの階層構造</div>
 
----
-#2. <a name="2">CGIプログラムのソースリストとその説明</a>
-##ソースリスト
+# 2. <a name="2">CGIプログラムのソースリストとその説明</a>
+
+## ソースリスト
 以下は,作成したcgiプログラムの**ページ**と**ソースコード**のリストです.
 - **search.cgi**
   - ページリンク
     - [opac/cgi/search.cgi](https://cgi.u.tsukuba.ac.jp/~s1811528/opac/cgi/search.cgi)
   - ソースコード
     - [github](https://github.com/eggplants/simple_opac/blob/master/cgi/search.cgi)
-<br>
+    
 - **accurate.cgi**
     - ページリンク
       - [opac/cgi/accurate.cgi](https://cgi.u.tsukuba.ac.jp/~s1811528/opac/cgi/accurate.cgi)
     - ソースコード
         - [github](https://github.com/eggplants/simple_opac/blob/master/cgi/accurate.cgi)
 
-##説明
-###search.cgi(各関数はdef.rbに記述)
+## 説明
+
+### search.cgi(各関数はdef.rbに記述)
 - makeword(cgi)
   - index.htmlからGETしたデータを検索語の分別がしやすいように加工するもの
   - \<field>:\<value>の形
@@ -140,7 +141,9 @@ W:.
   - hit_numが0の時は,pagenationと結果tableのheading表示をしない
   - title要素と\<h1 />のなかで検索ワードを変えて表示
   - rep_hideを「再読み込みする」をクリックした時(か,psの入力フォームでEnterした時)に送信する
-###accurate.cgi(各関数はdef.rbに記述)
+        
+### accurate.cgi(各関数はdef.rbに記述)
+
 - isbnto13(isbn10)
   - [openDB](https://openbd.jp/)をたたくためにISBNを10桁から13桁に変換する
   - 返り値はString(13桁の数字)
@@ -158,10 +161,10 @@ W:.
   - rowにfield_search_a(key,db)[0]でsearch.cgiから渡されたGET値(NBC)から取得した全てのフィールドの書誌データ
   - row[1].scan(/[0-9]/).join[0,10]で,ISBNフィールドの数字のみを先頭から10桁とって,rowと一緒にisbnto13に渡しrowと一緒にisbnto13に渡して画像表示htmlを呼んでいる
   - 各項目をtableにして表示している
+# 3. <a name="3">リレーション(テーブル)の構造とその説明</a>
 
----
-#3. <a name="3">リレーション(テーブル)の構造とその説明</a>
-##構造
+## 構造
+
 以下に,opac.dbにテーブルbibdataを作成した際のSQL(data/bib_sche.sql)を示します.
 ```sql
 CREATE TABLE bibdata(
@@ -183,7 +186,8 @@ CREATE TABLE bibdata(
 ```
 <div style="text-align:center;">▲図2, テーブルbibdataを作成するSQL</div>
 
-##説明
+## 説明
+
 各値について説明します.
 - NBC
   - 全国書誌番号
@@ -231,51 +235,67 @@ CREATE TABLE bibdata(
   - 分類番号
   - ex)F9-128
 
-*複数値を持つ可能性があるフィールドは,挿入する値を結合して挿入しました.
-*正規化も何も行っていないので反省したいです.
-*常に一意な値になるのはNBCのみ(TITLEやHOLDINGLOCは一意でない)なのでprimary keyに指定しました.
+*複数値を持つ可能性があるフィールドは,挿入する値を結合して挿入しました.*
 
----
-#4. <a name="4">工夫した点</a>
-##AND/OR検索に対応
+*正規化も何も行っていないので反省したいです.*
+
+*常に一意な値になるのはNBCのみ(TITLEやHOLDINGLOCは一意でない)なのでprimary keyに指定しました.*
+
+*元データjbisc.txtのDBにimport可能な形CSVに整形・加工する際用いたプログラムは[data/kaou.rb](data/kakou.rb)です.*
+
+# 4. <a name="4">工夫した点</a>
+
+## AND/OR検索に対応
+
 - AND/OR演算子でAND/OR検索できるようにしました.
-##ページングの件数を選択/入力で指定
+
+## ページングの件数を選択/入力で指定
+
 - \<datalist>を用いてページの表示件数の任意入力/選択を可能にしました.
 ##検索窓でフィールド指定検索
 - フィールドごとに検索できるようにしました.
 - 最初はフォームからフィールドごとに検索することを考えていなかったので,「TITLE:筑波」のように特定のフィールドを指す演算子をつけることを考えました.
-##デザイン
+
+## デザイン
+
 - 全体的に見やすく,スマホで見ても表示が崩れないようにしました.
 - また視覚障害の方でも見やすい配色/サイズにしました.
-##サイトの階層構造のサイトマップ作成
+
+## サイトの階層構造のサイトマップ作成
+
 -  [sitemap.xml](https://cgi.u.tsukuba.ac.jp/~s1811528/opac/sitemap.xml)を作成しました.
 - クローラの本を読んでいて「書くべき」と書いてあったので書きました.
-##HTMLとCSSのバリデーション/標準化
+
+## HTMLとCSSのバリデーション/標準化
+
 - HTML文書は基本エラーが出ないので,形式や継承関係,階層構造に問題がないか,HTMLタグ内にCSSに書くべき内容を含んでいないかを確認するため,W3CのValidator([HTML](http://validator.w3.org/)/[CSS](https://jigsaw.w3.org/css-validator/))を用いて標準化を行いました.
 
----
+# 5. <a name="5">得られた知見</a>
 
-#5. <a name="5">得られた知見</a>
-##サーバーサイドシステムの構築
+## サーバーサイドシステムの構築
+
 ㅤ普段,私たちが目にするWebページはフロントエンドであって,HTML/CSS/JSで構成されています.そのサーバーでのプログラムやシステムを見ることはできません.今回の演習で動的なページを作成するにあたって,その内部のプログラムの作成によって,その仕組みをしることができました.また,同時に履修していたPHP＋MySQLの授業での知識もより深めることができました.
-##Webページのスタイルシートを用いたデザイン
+
+## Webページのスタイルシートを用いたデザイン
+
 ㅤこれまで私がWebページを作る,となった時にはMarkDownやBootstrapを用いてあまりCSSを書くことはありませんでした.しかし今回デザインをこだわるにあたってCSSを1から書き起こしました.スタイルシートを用いたWebページデザインの基礎知識を得られたと思います.
-##構造化文書の作成
+
+## 構造化文書の作成
+
 ㅤHTMLやXMLの構造化文書のマークアップについての知識を得られました.
-##SQLiteを用いたDB構築
+
+## SQLiteを用いたDB構築
+
 ㅤこれまでPythonやRubyではMySQLを基本的に用いてきましたが,SQLiteには初めて触りました.記法,組み込み変数,挿入形式の違いを知ることができました.
-##Webサイトのgithubでの差分管理
-ㅤ(eggplants/opac)[https://github.com/eggplants/opac]として差分管理を行いました.
 
+## Webサイトのgithubでの差分管理
 
+ㅤ(eggplants/opac)[https://github.com/eggplants/opac] として差分管理を行いました.
 
+# 6. <a name="6">感想</a>
 
-
-
-
-
-
-
-
-
-
+ㅤ今回の課題を作成するに当たって、後半3回目の授業あたりから、HTMLやCSS,使用していないがJavaScriptやRubyでの
+CGI(Perlではちょっとやっていた)作成を初めて行いました。
+まず最初に驚いたのが、RubyでのCGIに関するWeb上の資料の少なさです。
+ページネーション処理の作成の際に、参考に出来るページがなかなか出てこず、
+一般的なページネーションの仕組みから考え実装しました。

@@ -150,9 +150,9 @@ def create_table_html(data,par)
     d=row[4].size>10?"...":""
     tab+= <<-EOS
     <tr>
-    <td class="result"><a href="accurate.cgi?NBC=#{row[0]}">#{row[2]}</a></td>
+    <td class="result"><a href="accurate.cgi?NBC=#{row[0]}">#{row[2].gsub(/""/,'"')}</a></td>
     <td class="result">#{row[3]}</td>
-    <td class="result">#{row[4][0,10]}#{d}</td>
+    <td class="result">#{row[4][0,10].gsub(/""/,'"')}#{d}</td>
     <td class="result">#{row[5]}</td>
     </tr>
 EOS

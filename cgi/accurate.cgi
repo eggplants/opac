@@ -51,11 +51,11 @@ Content-type: text/html
             </tr>
             <tr>
                <td>TITLE:</td>
-               <td>#{row[2]}</td>
+               <td>#{row[2].gsub(/""/,'"')}</td>
             </tr>
             <tr>
                <td>AUTH:</td>
-               <td>#{row[3]}</td>
+               <td>#{row[3].gsub(/""/,'"')}</td>
             </tr>
             <tr>
                <td>PUB:</td>
@@ -75,7 +75,7 @@ Content-type: text/html
             </tr>
             <tr>
                <td>SERIES:</td>
-               <td>#{row[8]}</td>
+               <td>#{row[8].gsub(/""/,'"')}</td>
             </tr>
             <tr>
                <td>NOTE:</td>

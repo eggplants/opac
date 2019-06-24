@@ -358,9 +358,10 @@
 </ul>
 </li>
 </ul>
-<p>*複数値を持つ可能性があるフィールドは,挿入する値を結合して挿入しました.<br>
+<p>*複数値を持つ可能性があるフィールドは,挿入する値を結合して挿入しました.(これは第一正規化制約に違反しています…)<br>
 *正規化も何も行っていないので反省したいです.<br>
-*常に一意な値になるのはNBCのみ(TITLEやHOLDINGLOCは一意でない)なのでprimary keyに指定しました.</p>
+*常に一意な値になるのはNBCのみ(TITLEやHOLDINGLOCは一意でない)なのでprimary keyに指定しました.<br>
+*元データjbisc.txtのDBにimport可能な形へのCSVに整形/加工に用いたプログラムは<a href="data/kakou.rb">data/kakou.rb</a>です.</p>
 <hr>
 <h1>4. <a name="4">工夫した点</a></h1>
 <h2>AND/OR検索に対応</h2>
