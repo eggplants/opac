@@ -12,7 +12,7 @@ PHYS:#{cgi["phys"]} NOTE:#{cgi["note"]} SERIES:#{cgi["series"]}\s
 ISBN:#{cgi["isbn"]} TITLEHEADING:#{cgi["titleheading"]}\s
 HOLDINGSRECORD:#{cgi["holdingsrecord"]} HOLDINGPHYS:#{cgi["holdingphys"]}\s
 HOLDINGLOC:#{cgi["holdingloc"]} #{cgi["search"]}"
-  words=word.gsub(/[\r\n]/,"").split(/[\+\s 　]+/).
+  words=word.gsub(/[\r\n]/,"").gsub(/<|>|""/,"").split(/[\+\s 　]+/).
          delete_if{|i|i=~/[aA][nN][dD]/||i=~/^[A-Z]+:$/||i==""}
   return words
 end
@@ -115,7 +115,7 @@ def retr_hitdata(hit,db)
     where NBC = '#{a}'
 SQL
     db.execute(sql).each{|row|
-      data<<row
+      data<<row.each{|i|}
     }
   }
   return data
