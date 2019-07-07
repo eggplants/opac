@@ -74,7 +74,7 @@ W:.
     - [opac/cgi/search.cgi](https://cgi.u.tsukuba.ac.jp/~s1811528/opac/cgi/search.cgi)
   - ソースコード
     - [github](https://github.com/eggplants/simple_opac/blob/master/cgi/search.cgi)
-    
+
 - **accurate.cgi**
     - ページリンク
       - [opac/cgi/accurate.cgi](https://cgi.u.tsukuba.ac.jp/~s1811528/opac/cgi/accurate.cgi)
@@ -141,7 +141,7 @@ W:.
   - hit_numが0の時は,pagenationと結果tableのheading表示をしない
   - title要素と\<h1 />のなかで検索ワードを変えて表示
   - rep_hideを「再読み込みする」をクリックした時(か,psの入力フォームでEnterした時)に送信する
-        
+
 ### accurate.cgi(各関数はdef.rbに記述)
 
 - isbnto13(isbn10)
@@ -269,6 +269,10 @@ CREATE TABLE bibdata(
 ## HTMLとCSSのバリデーション/標準化
 
 - HTML文書は基本エラーが出ないので,形式や継承関係,階層構造に問題がないか,HTMLタグ内にCSSに書くべき内容を含んでいないかを確認するため,W3CのValidator([HTML](http://validator.w3.org/)/[CSS](https://jigsaw.w3.org/css-validator/))を用いて標準化を行いました.
+
+##各書誌DBの検索
+
+- 検索した本を実際に「入手」するための機能として、詳細画面(accurate.cgi)主要な書誌DB検索システムに値(タイトルとISBN-13)を渡し、検索できるようにしました。
 
 # 5. <a name="5">得られた知見</a>
 

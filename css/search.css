@@ -33,11 +33,11 @@
    }
    table {
    align: center;
-   font-size: 18px;
+   font-size: 14px;
    }
    .result {
    background-color: white;
-   border-collapse: collapse
+   border-collapse: collapse;
    }
    td.result {
     border: 3px #000 solid;
