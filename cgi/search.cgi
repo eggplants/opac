@@ -67,15 +67,16 @@ Content-type: text/html
       #{create_paging_link(hit_num,cgi_values)}
       <table class="result">
          <tr>
-            <td class="result">TITLE</td>
-            <td class="result">AUTH</td>
-            <td class="result">PUB</td>
-            <td class="result">AUTHORHEADING1</td>
-            <td class="result">AUTHORHEADING2</td>
-            <td class="result">PUBDATE</td>
+            <td class="result">タイトル[TITLE]:</td>
+            <td class="result">著者[AUTH]:</td>
+            <td class="result">出版社[PUB]:</td>
+            <td class="result">著者標目[AUTHHEAD1]:</td>
+            <td class="result">著者標目[AUTHHEAD2]:</td>
+            <td class="result">出版年[PUBDATE]:</td>
          </tr>
 EOS
 puts head if hit_num!=0
 puts create_table_html(data,cgi_values)
 puts "</table>" if hit_num!=0
-puts "</body></html>"
+puts '<br><div class="center"><button type="button" onclick="location.href=\'../index.html\'" style="font-size:20px;width:200px;height:50px">検索画面へ戻る</button></div>' if hit_num!=0
+puts "<br></body></html>"

@@ -1,37 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <title>レポート</title>
       <meta charset="utf-8" />
-      <meta name="description" content="OPAC検索レポート.">
-      <meta name="keywords" content="OPAC,シンプル,使いやすい,簡単,筑波大学">
-      <meta name="author" content="春名航亨">
-      <meta name="generator" content="atom">
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@egpl0" />
-      <meta property="og:url" content="https://cgi.u.tsukuba.ac.jp/~s1811528/opac/report.html" />
-      <meta property="og:title" content="simple OPAC" />
-      <meta property="og:description" content="シンプルなOPAC検索システム." />
-      <meta property="og:image" content="./icon.png" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@egpl0" />
-      <link rel="shortcut icon" href="img/icon.png" >
+      <title>report</title>
       <link rel="stylesheet" type="text/css" href="css/report.css">
   </head>
   <body class="markdown-preview-plus-view">
-    <h1>知識情報演習I レポート課題</h1>
-<h2>201811528 春名航亨(水曜組)</h2>
-<hr>
+    <h1>知識情報演習I レポート課題 201811528 春名航亨(水曜組)</h1>
 <h1>はじめに</h1>
 <p>このページは,知識情報・図書館学類春ABモジュール開設「<a href="http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I"><strong>知識情報演習Ⅰ</strong></a>」の課題「OPACの構築」についてのレポートです.</p>
-<hr>
 <h1>内容</h1>
-<p><a href="#1">1. 構築したOPACのURL</a><br>
-<a href="#2">2. CGIプログラムのソースリストとその説明</a><br>
-<a href="#3">3. リレーション(テーブル)の構造とその説明</a><br>
-<a href="#4">4. 工夫した点</a><br>
-<a href="#5">5. 得られた知見</a></p>
-<hr>
+<ul>
+<li><a href="#1">1. 構築したOPACのURL</a></li>
+<li><a href="#2">2. CGIプログラムのソースリストとその説明</a></li>
+<li><a href="#3">3. リレーション(テーブル)の構造とその説明</a></li>
+<li><a href="#4">4. 工夫した点</a></li>
+<li><a href="#5">5. 得られた知見</a></li>
+<li><a href="#6">6. 感想</a></li>
+</ul>
 <h1>1. <a name="1">構築したOPACのURL</a></h1>
 <p>構築したOPACシステム「<strong>Simple OPAC</strong>」のindexページは,<br>
 <a href="https://cgi.u.tsukuba.ac.jp/~s1811528/opac/index.html"><strong>https://cgi.u.tsukuba.ac.jp/~s1811528/opac/index.html</strong></a>です.</p>
@@ -67,9 +53,16 @@
 <span class="syntax--text syntax--plain syntax--null-grammar"><span>│      report.css...report.html</span></span>
 <span class="syntax--text syntax--plain syntax--null-grammar"><span>│</span></span>
 <span class="syntax--text syntax--plain syntax--null-grammar"><span>├─img</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      amazon.png...Amazonバナー</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      cinii.png...CiNiiバナー</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      google.png...Google Booksバナー</span></span>
 <span class="syntax--text syntax--plain syntax--null-grammar"><span>│      icon.png...ページicon</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      ndl.png...NDL Searchバナー</span></span>
 <span class="syntax--text syntax--plain syntax--null-grammar"><span>│      notfound.png...書誌画像がnullの時表示される画像</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      rakuten.png...Rakuten Booksバナー</span></span>
 <span class="syntax--text syntax--plain syntax--null-grammar"><span>│      requirement.png...要件のスクリーンショット</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      sei.png...ページicon</span></span>
+<span class="syntax--text syntax--plain syntax--null-grammar"><span>│      tulips.png...Tulips Searchバナー</span></span>
 <span class="syntax--text syntax--plain syntax--null-grammar"><span>│</span></span>
 <span class="syntax--text syntax--plain syntax--null-grammar"><span>├─cgi</span></span>
 <span class="syntax--text syntax--plain syntax--null-grammar"><span>│      accurate.cgi...書誌の詳細表示ページ</span></span>
@@ -81,12 +74,12 @@
 <span class="syntax--text syntax--plain syntax--null-grammar"><span>        report.md...report.htmlの雛型</span></span>
 </pre>
 <div style="text-align:center;">▲図1, OPACシステムの階層構造</div>
-<hr>
 <h1>2. <a name="2">CGIプログラムのソースリストとその説明</a></h1>
 <h2>ソースリスト</h2>
 <p>以下は,作成したcgiプログラムの<strong>ページ</strong>と<strong>ソースコード</strong>のリストです.</p>
 <ul>
-<li><strong>search.cgi</strong>
+<li>
+<p><strong>search.cgi</strong></p>
 <ul>
 <li>ページリンク
 <ul>
@@ -95,13 +88,13 @@
 </li>
 <li>ソースコード
 <ul>
-<li><a href="https://github.com/eggplants/simple_opac/blob/master/cgi/search.cgi">github</a><br>
-<br></li>
+<li><a href="https://github.com/eggplants/simple_opac/blob/master/cgi/search.cgi">github</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>accurate.cgi</strong>
+<li>
+<p><strong>accurate.cgi</strong></p>
 <ul>
 <li>ページリンク
 <ul>
@@ -242,7 +235,6 @@
 </ul>
 </li>
 </ul>
-<hr>
 <h1>3. <a name="3">リレーション(テーブル)の構造とその説明</a></h1>
 <h2>構造</h2>
 <p>以下に,opac.dbにテーブルbibdataを作成した際のSQL(data/bib_sche.sql)を示します.</p>
@@ -358,11 +350,10 @@
 </ul>
 </li>
 </ul>
-<p>*複数値を持つ可能性があるフィールドは,挿入する値を結合して挿入しました.(これは第一正規化制約に違反しています…)<br>
-*正規化も何も行っていないので反省したいです.<br>
-*常に一意な値になるのはNBCのみ(TITLEやHOLDINGLOCは一意でない)なのでprimary keyに指定しました.<br>
-*元データjbisc.txtのDBにimport可能な形へのCSVに整形/加工に用いたプログラムは<a href="data/kakou.rb">data/kakou.rb</a>です.</p>
-<hr>
+<p><em>複数値を持つ可能性があるフィールドは,挿入する値を結合して挿入しました.</em></p>
+<p><em>正規化も何も行っていないので反省したいです.</em></p>
+<p><em>常に一意な値になるのはNBCのみ(TITLEやHOLDINGLOCは一意でない)なのでprimary keyに指定しました.</em></p>
+<p><em>元データjbisc.txtのDBにimport可能な形CSVに整形・加工する際用いたプログラムは<a href="data/kakou.rb">data/kaou.rb</a>です.</em></p>
 <h1>4. <a name="4">工夫した点</a></h1>
 <h2>AND/OR検索に対応</h2>
 <ul>
@@ -391,7 +382,10 @@
 <ul>
 <li>HTML文書は基本エラーが出ないので,形式や継承関係,階層構造に問題がないか,HTMLタグ内にCSSに書くべき内容を含んでいないかを確認するため,W3CのValidator(<a href="http://validator.w3.org/">HTML</a>/<a href="https://jigsaw.w3.org/css-validator/">CSS</a>)を用いて標準化を行いました.</li>
 </ul>
-<hr>
+<h2>各書誌DBの検索</h2>
+<ul>
+<li>検索した本を実際に「入手」するための機能として、詳細画面(accurate.cgi)主要な書誌DB検索システムに値(タイトルとISBN-13)を渡し、検索できるようにしました。(Amazon,Rakuten,CiNii Books,NDL Search,Tulips Search,google Books)</li>
+</ul>
 <h1>5. <a name="5">得られた知見</a></h1>
 <h2>サーバーサイドシステムの構築</h2>
 <p>ㅤ普段,私たちが目にするWebページはフロントエンドであって,HTML/CSS/JSで構成されています.そのサーバーでのプログラムやシステムを見ることはできません.今回の演習で動的なページを作成するにあたって,その内部のプログラムの作成によって,その仕組みをしることができました.また,同時に履修していたPHP＋MySQLの授業での知識もより深めることができました.</p>
@@ -402,6 +396,12 @@
 <h2>SQLiteを用いたDB構築</h2>
 <p>ㅤこれまでPythonやRubyではMySQLを基本的に用いてきましたが,SQLiteには初めて触りました.記法,組み込み変数,挿入形式の違いを知ることができました.</p>
 <h2>Webサイトのgithubでの差分管理</h2>
-<p>ㅤ(eggplants/opac)[<a href="https://github.com/eggplants/opac">https://github.com/eggplants/opac</a>]として差分管理を行いました.</p>
+<p>ㅤ(eggplants/opac)[<a href="https://github.com/eggplants/opac">https://github.com/eggplants/opac</a>] として差分管理を行いました.</p>
+<h1>6. <a name="6">感想</a></h1>
+<p>ㅤ今回の課題を作成するに当たって、後半3回目の授業あたりから、HTMLやCSS,使用していないがJavaScriptやRubyでの<br>
+CGI(Perlではちょっとやっていた)作成を初めて行いました。<br>
+まず最初に驚いたのが、RubyでのCGIに関するWeb上の資料の少なさです。<br>
+ページネーション処理の作成の際に、参考に出来るページがなかなか出てこず、<br>
+一般的なページネーションの仕組みから考え実装しました。</p>
   </body>
 </html>

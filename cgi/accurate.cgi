@@ -40,7 +40,7 @@ Content-type: text/html
       <div class="center">
          <button type="button" onclick="history.back()" style="font-size:20px;width:242px;height:50px">検索結果一覧へ戻る</button>
       </div>
-      <h1>タイトル:[<span style="color:#ff0000;">#{row[2].gsub(/""/,'"')}</span>]の詳細表示</h1>
+      <h1>[<span style="color:#ff0000;">#{row[2].gsub(/""/,'"')}<br>< #{key} ></span>]の詳細表示</h1>
       <table>
          <tbody>
             <tr>
@@ -124,6 +124,7 @@ Content-type: text/html
               <a href="https://www.google.co.jp/search?hl=ja&tbo=p&tbm=bks&q=isbn:#{isbn13}+intitle:#{row[2].gsub(/""/,'"').gsub(/\./," ")}&num=10"><img src="../img/google.png" width="100px"/></a>
          </tbody>
       </table>
+      <br>
       <div class="center"><button type="button" onclick="history.back()" style="font-size:20px;width:242px;height:50px">検索結果一覧へ戻る</button></div>
    </body>
 </html>

@@ -50,9 +50,16 @@ W:.
 │      report.css...report.html
 │
 ├─img
+│      amazon.png...Amazonバナー
+│      cinii.png...CiNiiバナー
+│      google.png...Google Booksバナー
 │      icon.png...ページicon
+│      ndl.png...NDL Searchバナー
 │      notfound.png...書誌画像がnullの時表示される画像
+│      rakuten.png...Rakuten Booksバナー
 │      requirement.png...要件のスクリーンショット
+│      sei.png...ページicon
+│      tulips.png...Tulips Searchバナー
 │
 ├─cgi
 │      accurate.cgi...書誌の詳細表示ページ
@@ -272,7 +279,7 @@ CREATE TABLE bibdata(
 
 ##各書誌DBの検索
 
-- 検索した本を実際に「入手」するための機能として、詳細画面(accurate.cgi)主要な書誌DB検索システムに値(タイトルとISBN-13)を渡し、検索できるようにしました。
+- 検索した本を実際に「入手」するための機能として、詳細画面(accurate.cgi)主要な書誌DB検索システムに値(タイトルとISBN-13)を渡し、検索できるようにしました。(Amazon,Rakuten,CiNii Books,NDL Search,Tulips Search,google Books)
 
 # 5. <a name="5">得られた知見</a>
 
