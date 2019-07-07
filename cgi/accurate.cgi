@@ -9,6 +9,9 @@ db=SQLite3::Database.new("../data/opac.db")
 key=CGI.new["NBC"]
 key="JP20592050" if key==""
 row=field_search_a(key,db)[0]
+isbn10=row[1].gsub(/＞/,",")
+isbn13=isbnto13(row[1].scan(/[0-9]/).join[0,10])
+isbn13="" if isbn10.scan(/[0-9]/).size<10
 puts <<-EOS
 Content-type: text/html
 
@@ -34,79 +37,94 @@ Content-type: text/html
       <link rel="stylesheet" type="text/css" href="../css/accurate.css">
    </head>
    <body>
-      #{bibimage(isbnto13(row[1].scan(/[0-9]/).join[0,13]),row)}<br>
+      <div class="center">
+         <button type="button" onclick="history.back()" style="font-size:20px;width:242px;height:50px">検索結果一覧へ戻る</button>
+      </div>
+      <h1>タイトル:[<span style="color:#ff0000;">#{row[2].gsub(/""/,'"')}</span>]の詳細表示</h1>
       <table>
          <tbody>
-         <tr>
-         <th>フィールド名</th>
-         <th>内容</th>
-         </tr>
             <tr>
-               <td>NBC:</td>
-               <td>#{row[0]}</td>
+               <th><b>フィールド名</b></th>
+               <th><b>内容</b></th>
             </tr>
             <tr>
-               <td>ISBN:</td>
-               <td>#{row[1].gsub(/＞/,",")}</td>
-            </tr>
-            <tr>
-               <td>TITLE:</td>
+               <td>タイトル[TITLE]:</td>
                <td>#{row[2].gsub(/""/,'"')}</td>
             </tr>
             <tr>
-               <td>AUTH:</td>
-               <td>#{row[3].gsub(/""/,'"')}</td>
-            </tr>
-            <tr>
-               <td>PUB:</td>
-               <td>#{row[4]}</td>
-            </tr>
-            <tr>
-               <td>PUBDATE:</td>
-               <td>#{row[5]}</td>
-            </tr>
-            <tr>
-               <td>ED:</td>
-               <td>#{row[6]}</td>
-            </tr>
-            <tr>
-               <td>PHYS:</td>
-               <td>#{row[7]}</td>
-            </tr>
-            <tr>
-               <td>SERIES:</td>
-               <td>#{row[8].gsub(/""/,'"')}</td>
-            </tr>
-            <tr>
-               <td>NOTE:</td>
-               <td>#{row[9].gsub(/＞/,",")}</td>
-            </tr>
-            <tr>
-               <td>TITLEHEADING:</td>
+               <td>タイトル標目[TITLEHEADING]:</td>
                <td>#{row[10].gsub(/＞/,",")}</td>
             </tr>
             <tr>
-               <td>AUTHORHEADING:</td>
-               <td>#{row[11].gsub(/＞/,",")}</td>
+               <td>著者[AUTH]:</td>
+               <td>#{row[3].gsub(/""/,'"')}</td>
             </tr>
             <tr>
-               <td>HOLDINGSRECORD:</td>
-               <td>#{row[12]}</td>
+               <td>著者標目[AUTHORHEADING]:</td>
+               <td><a href="search.cgi?authorheading=#{row[11].split("＞")[0]}&ps=&p=0">#{row[11].split("＞")[0]}</a><br>
+               <a href="search.cgi?authorheading=#{row[11].split("＞")[1]}&ps=&p=0">#{row[11].split("＞")[1]}</a></td>
             </tr>
             <tr>
-               <td>HOLDINGPHYS:</td>
-               <td>#{row[13]}</td>
+               <td>出版社[PUB]:</td>
+               <td><a href="search.cgi?pub=#{row[4]}&ps=&p=0">#{row[4]}</a></td>
             </tr>
             <tr>
-               <td>HOLDINGLOC:</td>
+               <td>出版年[PUBDATE]:</td>
+               <td>#{row[5]}</td>
+            </tr>
+            <tr>
+               <td>版[ED]:</td>
+               <td>#{row[6]}</td>
+            </tr>
+            <tr>
+               <td>シリーズ[SERIES]:</td>
+               <td><a href="search.cgi?series=#{row[8].gsub(/""/,'"').split(";")[0]}&ps=&p=0">#{row[8].gsub(/""/,'"').split(";")[0]}</a>#{row[8].gsub(/""/,'"').scan(/;[0-9]+/)[0]}</td>
+            </tr>
+            <tr>
+               <td>分類番号[HOLDINGLOC]:</td>
                <td>#{row[14]}</td>
             </tr>
             <tr>
-            <td><button type="button" onclick="history.back()" style="font-size:20px;width:242px;height:50px">検索結果一覧へ戻る</button></td>
-            <td></td>
+               <td>形態[PHYS]:</td>
+               <td>#{row[7]}</td>
             </tr>
+            <tr>
+               <td>ISBN番号[ISBN]:</td>
+               <td>ISBN10:#{row[1].gsub(/＞/,",")}
+                  <br>ISBN13:#{isbn13}
+               </td>
+            </tr>
+            <tr>
+               <td>全国書誌番号[NBC]:</td>
+               <td>#{row[0]}</td>
+            </tr>
+            <tr>
+               <td>個別資料の識別番号[HOLDINGSRECORD]:</td>
+               <td>#{row[12]}</td>
+            </tr>
+            <tr>
+               <td>所在棚名[HOLDINGPHYS]:</td>
+               <td>#{row[13]}</td>
+            </tr>
+            <tr>
+               <td>注記[NOTE]:</td>
+               <td>#{row[9].gsub(/＞/,",")}</td>
+            </tr>
+            <tr>
+               <td>書影[openBD API]:<br><br>*書影がない場合404画像.</td>
+               <td>#{bibimage(isbn13,row)}</td>
+            </tr>
+            <tr>
+              <td>検索[Amazon,Rakuten,CiNii Books,NDL Search,Tulips Search,google Books]:
+              <td><a href="https://www.amazon.co.jp/s?i=stripbooks&rh=p_66%3A#{isbn13}&rh=p_28%3A#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/amazon.png" width="100px"/></a>
+              <a href="https://books.rakuten.co.jp/search?g=001&isbnJan=#{isbn13}&title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/rakuten.png" width="140px"/></a>
+              <a href="https://ci.nii.ac.jp/books/search?advanced=true&isbn=#{isbn13}&title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/cinii.png" width="150px"/></a>
+              <a href="https://iss.ndl.go.jp/books?search_mode=advanced&rft.isbn=#{isbn13}&rft.title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/ndl.png" width="150px"/></a>
+              <a href="https://www.tulips.tsukuba.ac.jp/search/?isbn=#{isbn13}&title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/tulips.png" width="150px"/></a>
+              <a href="https://www.google.co.jp/search?hl=ja&tbo=p&tbm=bks&q=isbn:#{isbn13}+intitle:#{row[2].gsub(/""/,'"').gsub(/\./," ")}&num=10"><img src="../img/google.png" width="100px"/></a>
          </tbody>
       </table>
+      <div class="center"><button type="button" onclick="history.back()" style="font-size:20px;width:242px;height:50px">検索結果一覧へ戻る</button></div>
    </body>
 </html>
 EOS

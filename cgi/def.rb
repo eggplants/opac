@@ -10,10 +10,14 @@ NBC:#{cgi["nbc"]} TITLE:#{cgi["title"]} AUTH:#{cgi["auth"]}\s
 ED:#{cgi["ed"]} PUB:#{cgi["pub"]} PUBDATE:#{cgi["pubdate"]}\s
 PHYS:#{cgi["phys"]} NOTE:#{cgi["note"]} SERIES:#{cgi["series"]}\s
 ISBN:#{cgi["isbn"]} TITLEHEADING:#{cgi["titleheading"]}\s
+AUTHORHEADING:#{cgi["authorheading"]}\s
 HOLDINGSRECORD:#{cgi["holdingsrecord"]} HOLDINGPHYS:#{cgi["holdingphys"]}\s
 HOLDINGLOC:#{cgi["holdingloc"]} #{cgi["search"]}"
-  words=word.gsub(/[\r\n]/,"").gsub(/<|>|""/,"").split(/[\+\s 　]+/).
+  words=word.gsub(/[\r\n]/,"").gsub(/<[a-zA-Z]+>|\"|\'/,"").split(/[\+\s 　]+/).
          delete_if{|i|i=~/[aA][nN][dD]/||i=~/^[A-Z]+:$/||i==""}
+  if cgi["andor"]=="or"
+    (words.size-1).times{|i|words.insert(i*2+1, "OR")}
+  end
   return words
 end
 #検索語の分別
@@ -151,8 +155,10 @@ def create_table_html(data,par)
     tab+= <<-EOS
     <tr>
     <td class="result"><a href="accurate.cgi?NBC=#{row[0]}">#{row[2].gsub(/""/,'"')}</a></td>
-    <td class="result">#{row[3]}</td>
-    <td class="result">#{row[4][0,10].gsub(/""/,'"')}#{d}</td>
+    <td class="result">#{row[3][0,15]}</td>
+    <td class="result"><a href="search.cgi?pub=#{row[4]}&ps=&p=0">#{row[4][0,10].gsub(/""/,'"')}#{d}</a></td>
+    <td class="result"><a href="search.cgi?authorheading=#{row[11].split("＞")[0]}&ps=&p=0">#{row[11].split("＞")[0]}</a></td>
+    <td class="result"><a href="search.cgi?authorheading=#{row[11].split("＞")[1]}&ps=&p=0">#{row[11].split("＞")[1]}</a></td>
     <td class="result">#{row[5]}</td>
     </tr>
 EOS
@@ -206,4 +212,3 @@ def bibimage(isbn13,per)
     img='<img src="../img/notfound.png" width="200" height="287" alt="404"/>'
   end
 end
-
