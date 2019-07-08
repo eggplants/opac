@@ -43,13 +43,11 @@ Content-type: text/html
       <link rel="stylesheet" type="text/css" href="../css/search.css">
    </head>
    <body>
-      <div class="center"><button type="button" onclick="location.href='../index.html'" style="font-size:20px;width:200px;height:50px">検索画面へ戻る</button></div>
+      <h1 class="title"><a href="../index.html">Simple OPAC</a></h1><hr>
       EOS
-      puts "
-      <h1>[<span style='color:#ff0000;'>#{search_display}</span>]の検索結果:<span style='color:#ff0000;'>#{hit_num}</span>件</h1>
-      " if hit_num==0
+      puts "<h1 class='word'>[<span style='color:#ff0000;'> #{search_display}</span>]の検索結果:<span style='color:#ff0000;'>#{hit_num}</span>件</h1>" if hit_num==0
       head=<<EOS
-      <h1>[<span style="color:#ff0000;">#{search_display}</span>]の検索結果:<span style="color:#ff0000;">#{hit_num}</span>件</h1>
+      <h1 class="word">[<span style="color:#ff0000;">#{search_display}</span>]の検索結果:<span style="color:#ff0000;">#{hit_num}</span>件</h1>
       <form action="#" method="GET">
          <input type="text" name="ps" list="case-numbers1" placeholder="1ページの表示件数:入力/選択" style="font-size:20px;">
          <datalist id="case-numbers1">
@@ -67,16 +65,21 @@ Content-type: text/html
       #{create_paging_link(hit_num,cgi_values)}
       <table class="result">
          <tr>
-            <td class="result">タイトル[TITLE]:</td>
-            <td class="result">著者[AUTH]:</td>
-            <td class="result">出版社[PUB]:</td>
-            <td class="result">著者標目[AUTHHEAD1]:</td>
-            <td class="result">著者標目[AUTHHEAD2]:</td>
-            <td class="result">出版年[PUBDATE]:</td>
+            <td class="result">タイトル:[TITLE]</td>
+            <td class="result">著者標目1:[AUTHHEAD1]</td>
+            <td class="result">著者標目2:[AUTHHEAD2]</td>
+            <td class="result">出版社:[PUB]</td>
+            <td class="result">出版年:[PUBDATE]</td>
          </tr>
 EOS
 puts head if hit_num!=0
 puts create_table_html(data,cgi_values)
 puts "</table>" if hit_num!=0
 puts '<br><div class="center"><button type="button" onclick="location.href=\'../index.html\'" style="font-size:20px;width:200px;height:50px">検索画面へ戻る</button></div>' if hit_num!=0
-puts "<br></body></html>"
+puts <<-EOS
+	<br><hr>
+      <br>
+      <div class="center">このページは,春AB必修科目「<a href="http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I">知識情報演習I</a>」の演習課題です.(Chrome/Firefox対応.)</div>
+      <div class="center">Copyright © 2019 春名航亨(<a href="https://www.u.tsukuba.ac.jp/~s1811528/">201811528</a>) All Rights Reserved.</div>
+      <br><br></body></html>
+EOS

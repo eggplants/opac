@@ -155,10 +155,9 @@ def create_table_html(data,par)
     tab+= <<-EOS
     <tr>
     <td class="result"><a href="accurate.cgi?NBC=#{row[0]}">#{row[2].gsub(/""/,'"')}</a></td>
-    <td class="result">#{row[3][0,15]}</td>
-    <td class="result"><a href="search.cgi?pub=#{row[4]}&ps=&p=0">#{row[4][0,10].gsub(/""/,'"')}#{d}</a></td>
     <td class="result"><a href="search.cgi?authorheading=#{row[11].split("＞")[0]}&ps=&p=0">#{row[11].split("＞")[0]}</a></td>
     <td class="result"><a href="search.cgi?authorheading=#{row[11].split("＞")[1]}&ps=&p=0">#{row[11].split("＞")[1]}</a></td>
+    <td class="result"><a href="search.cgi?pub=#{row[4]}&ps=&p=0">#{row[4][0,10].gsub(/""/,'"')}#{d}</a></td>
     <td class="result">#{row[5]}</td>
     </tr>
 EOS
