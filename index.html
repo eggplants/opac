@@ -19,12 +19,11 @@
       <link rel="stylesheet" type="text/css" href="css/index.css">
    </head>
    <body>
-      <a href="report.html">report</a><a href="yet_list.html" style="text-align:left;">.</a>
       <h1>Simple OPAC</h1>
       <form action="cgi/search.cgi" method="GET">
          <div class="center"><input class="search" type="text" value="" name="search" placeholder="Please enter any keyword(s)"></div>
          <br><br>
-         <div class="center"><input type="text" name="ps" list="case-numbers1" placeholder="1ページの表示件数:入力/選択" style="font-size:20px;"></div>
+         <div class="center"><input type="text" name="ps" list="case-numbers1" placeholder="1ページの表示件数:" style="font-size:25px;"></div>
          <datalist id="case-numbers1">
             <option value="20">けっこう少ない</option>
             <option value="50">少ない</option>
@@ -38,10 +37,10 @@
          <input type="hidden" name="p" value="0">
          <div class="center"><input class="btn-square" type="submit" value="検索する"></div>
       </form>
-      <br><br>
+      <br><br><div class="left">
       <hr>
       <details>
-         <summary>詳細フィールドから検索</summary>
+         <summary>詳細検索</summary>
          <form action="cgi/search.cgi" method="GET">
             <ul class="columns1">
                <li>
@@ -113,7 +112,7 @@
                   </table>
                   <br><input type="hidden" name="p" value="0">
                   <div class="center">
-                     <input type="text" name="ps" value="" list="case-numbers2" placeholder="1ページの表示件数:入力/選択" style="font-size:20px;">
+                     <input type="text" name="ps" value="" list="case-numbers2" placeholder="1ページの表示件数:" style="font-size:25px;">
                      <datalist id="case-numbers2">
                         <option value="20">けっこう少ない</option>
                         <option value="50">少ない</option>
@@ -132,7 +131,7 @@
       </details>
     <hr>
       <details>
-      <summary>各レコードの説明ㅤㅤㅤ</summary>
+      <summary>各レコードの説明</summary>
       <ul class="columns2">
          <li>NBC:全国書誌番号ㅤTITLE:題名
             AUTH:著者ㅤED:版<br>
@@ -147,7 +146,7 @@
       </ul>
     </details>
     <hr>
-    <details><summary>使用例ㅤㅤㅤㅤㅤㅤㅤㅤ</summary>
+    <details><summary>使用例</summary>
     <ul class="columns2">
        <li><label>①AND検索するとき </label></li>
        <li><label>ㅤ- 花子さん だいすき[スペース全/半可]か、<br>ㅤ- 花子さん and[AND可] だいすき<br></label></li>
@@ -167,9 +166,9 @@
     </ul>
   </details>
       <hr>
-      <details><summary>作者ㅤㅤㅤㅤㅤㅤㅤㅤㅤ</summary>
-         <div class="center"><a href="img/sei.png"><img src="img/sei.png" width="500" alt="sei"></a></div>
-         <ul class="columns2">
+      <details><summary>作者</summary>
+         <br><br><div class="center"><a href="https://www.u.tsukuba.ac.jp/~s1811528/JKJ/selfie.gif"><img src="https://www.u.tsukuba.ac.jp/~s1811528/JKJ/selfie.gif" width="500" alt="sei" border="50"></a><br>▲自画像です.<br></div>         
+	<ul class="columns2">
             <li>
                作者情報
                <ul>
@@ -190,10 +189,13 @@
             </li>
          </ul>
       </details>
+</div>
       <hr>
       <br>
-      <div class="center">このページは,春AB必修科目「<a href="http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I">知識情報演習I</a>」の演習課題です.</div>
+      <ul class="column1">
+      <div class="center">このページは,春AB必修科目「<a href="http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I">知識情報演習I</a>」の演習課題です.(Chrome/Firefox対応.)</div>
       <div class="center">Copyright © 2019 春名航亨(<a href="https://www.u.tsukuba.ac.jp/~s1811528/">201811528</a>) All Rights Reserved.</div>
-      <br><br>
+      </ul>
+	<br><br><a href="report.html">report</a><a href="yet_list.html" style="text-align:left;">.</a>
    </body>
 </html>

@@ -1,15 +1,20 @@
 body {
 	background-color: #afafaf;
-}
-
-h1 {
-	text-decoration: underline;
-	margin: 100px;
-	text-align: center;
-	font-size: 50px;
-	text-shadow: 100px 20px 5px #808080;
-}
-
+     }
+h1.title {
+   text-decoration: underline;
+   margin: 10px ;
+   text-align: left;
+   font-size: 30px;
+   text-shadow: 100px 10px 20px #808080;
+   }
+h1.word {
+   text-decoration: underline;
+   margin: 20px;
+   text-align: center;
+   font-size: 50px;
+   text-shadow: 100px 10px 20px #808080;
+   }
 h2 {
 	position: relative;
 	top: 0;
@@ -80,3 +85,12 @@ ul.columns1 {
 	text-align: left;
 	column-rule: 2px dashed black;
 }
+hr {
+  border: 2px dashed black;
+  width: 780px
+}
+        a:link {color:#000000;}
+        a:visited{color:#008000;} 
+        a:hover{color:#0000ff;} 
+        a:active{color:#ffff00;} 
+

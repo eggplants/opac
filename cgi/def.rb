@@ -5,8 +5,7 @@ require 'json'
 
 #検索語の受け取り整形
 def makewords(cgi)
-  word="
-NBC:#{cgi["nbc"]} TITLE:#{cgi["title"]} AUTH:#{cgi["auth"]}\s
+  word="NBC:#{cgi["nbc"]} TITLE:#{cgi["title"]} AUTH:#{cgi["auth"]}\s
 ED:#{cgi["ed"]} PUB:#{cgi["pub"]} PUBDATE:#{cgi["pubdate"]}\s
 PHYS:#{cgi["phys"]} NOTE:#{cgi["note"]} SERIES:#{cgi["series"]}\s
 ISBN:#{cgi["isbn"]} TITLEHEADING:#{cgi["titleheading"]}\s
@@ -117,6 +116,7 @@ def retr_hitdata(hit,db)
     select *
     from bibdata
     where NBC = '#{a}'
+    order by TITLE
 SQL
     db.execute(sql).each{|row|
       data<<row.each{|i|}
@@ -127,6 +127,7 @@ end
 #ページリンクの生成
 def create_paging_link(hits,par)
   par["ps"]=["20"] if par["ps"]==[""]
+  par["ps"]=["20"] if par["ps"][0]=~/[^0-9]/
   # par["ps"]||=["20"]
   # par["ps"]=["20"] if par["ps"][0].to_i<0
   p_now,p_size,hits=par["p"][0].to_i,par["ps"][0].to_i,hits.to_i
