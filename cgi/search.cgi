@@ -43,13 +43,13 @@ Content-type: text/html
       <link rel="stylesheet" type="text/css" href="../css/search.css">
    </head>
    <body>
-      <h1 class="title"><a href="../index.html">Simple OPAC</a></h1><hr>
+      <a href="../index.html"><img src="../img/logo.png" width="180px"/></a><hr>
       EOS
       puts "<br><h1 class='word'>[<span style=' ;color:#ff0000;'> #{search_display}</span>]の検索結果:<span style='color:#ff0000;'>#{hit_num}</span>件</h1>" if hit_num==0
       head=<<EOS
       <h1 class="word">[<span style="color:#ff0000;">#{search_display}</span>]の検索結果:<span style="color:#ff0000;">#{hit_num}</span>件</h1>
       <form action="#" method="GET">
-         <input type="text" name="ps" list="case-numbers1" placeholder="1ページの表示件数:" style="font-size:23px;">
+         <div class="center"><input type="text" name="ps" list="case-numbers1" placeholder="1ページの表示件数:" style="font-size:23px;">
          <datalist id="case-numbers1">
             <option value="20">けっこう少ない</option>
             <option value="50">少ない</option>
@@ -60,10 +60,10 @@ Content-type: text/html
             <option value="5000">多い</option>
          </datalist>
          #{rep_hide(cgi_values)}
-         <input type="submit" value="再読込する" style="font-size:20px;">
+         <input type="submit" value="再読込する" style="font-size:20px;"></div>
       </form>
-      #{create_paging_link(hit_num,cgi_values)}
-      <table class="result" frame="border">
+      <div class="center">#{create_paging_link(hit_num,cgi_values)}</div>
+      <div class="center"><table class="result" frame="border">
         　　<th class="result">タイトル:[TITLE]</th>
             <th class="result">著者標目1:[AUTHHEAD1]</th>
             <th class="result">著者標目2:[AUTHHEAD2]</th>
@@ -72,7 +72,7 @@ Content-type: text/html
 EOS
 puts head if hit_num!=0
 puts create_table_html(data,cgi_values)
-puts "</table>" if hit_num!=0
+puts "</table></div>" if hit_num!=0
 puts '<br><div class="center"><button type="button" onclick="location.href=\'../index.html\'" style="font-size:20px;width:200px;height:50px">検索画面へ戻る</button></div>' if hit_num!=0
 puts <<-EOS
 	<br><hr>
