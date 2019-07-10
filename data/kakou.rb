@@ -8,6 +8,7 @@ File.foreach("jbisc.txt"){|row|
   unless row=='*'
     key=row.scan(/^([A-Z]+): /)[0][0]
     unless duplicate.include?(key)
+      row.sub!(/ : /,"＞") if key=="TR"
       data[i][key.to_sym]=row.delete(key+": ")
     else
       (data[i][key.to_sym]||=[])<<row.delete(key+": ")
@@ -16,11 +17,11 @@ File.foreach("jbisc.txt"){|row|
     i+=1
   end
 }
-
 #書き出し
 out=[]
 data.each{|dic|
   duplicate.each{|d|dic[d.to_sym]||=[]}
+  dic[:TR].sub!(/＞/," : ")
   dic[:TR]=~/\//? dic[:TR].sub!(/\//,"|") : dic[:TR]+="|"
   dic[:PUB].sub!(/,/,"|")
   dic[:PUB].sub!(/\[2004\]$/,"2004")
