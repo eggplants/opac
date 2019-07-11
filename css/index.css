@@ -1,8 +1,9 @@
 body {
 	max-width: 790px;
 	background-color: #afafaf;
-  margin: auto;
+	margin: auto;
 }
+
 h1 {
 	text-decoration: underline;
 	margin: 50px;
@@ -10,28 +11,36 @@ h1 {
 	font-size: 75px;
 	text-shadow: 100px 10px 20px #808080;
 }
+
 table {
 	margin-left: auto;
-  margin-right: auto;
+	margin-right: auto;
 }
+
 img {
-	border: inset 100px #808080;
+	border: 100px inset #808080;
+	width: 500px;
 }
-tr{
+
+tr {
 	font-family: sans-serif;
 	font-size: 10pt
 }
+
 td {
 	font-family: sans-serif;
 	font-size: 10pt
 }
+
 details {
-  font-size: 30px;
-  margin-left: 20px;
+	font-size: 30px;
+	margin-left: 20px;
 }
+
 p {
 	margin: 50px;
 }
+
 input.search {
 	text-align: center;
 	width: 600px;
@@ -44,6 +53,7 @@ input.search {
 	background-image: none;
 	font-size: 25px;
 }
+
 .btn-square {
 	font-size: 30px;
 	position: relative;
@@ -57,16 +67,20 @@ input.search {
 	font-weight: bold;
 	border: solid 2px #000000;
 }
+
 .btn-square:active {
 	box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
+
 div.center {
 	text-align: center;
 }
+
 .center-h {
 	text-align: center;
-  font-size: 25px;
+	font-size: 25px;
 }
+
 ul.columns1 {
 	font-family: "serif";
 	border-radius: 10px;
@@ -80,6 +94,7 @@ ul.columns1 {
 	text-align: left;
 	column-rule: 2px dashed black;
 }
+
 .columns2 {
 	font-family: "serif";
 	border-radius: 10px;
@@ -93,7 +108,8 @@ ul.columns1 {
 	text-align: left;
 	column-rule: 2px dashed black;
 }
+
 hr {
-  border: 2px dashed black;
-  width: 780px
+	border: 2px dashed black;
+	width: 780px
 }

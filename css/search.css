@@ -1,81 +1,91 @@
-   body {
-   background-color: #afafaf;
-   }
-h1.title {
-   text-decoration: underline;
-   margin: 10px ;
-   text-align: left;
-   font-size: 30px;
-   text-shadow: 100px 10px 20px #808080;
-   }
-
-   h1.word {
-   text-decoration: underline;
-   margin: 20px;
-   text-align: center;
-   font-size: 30px;
-   text-shadow: 100px 10px 20px #808080;
-   }
-   p {
-   margin: 50px;
-   }
-   input.btn-square {
-   font-size: 30px;
-   position: relative;
-   display: inline-block;
-   padding: 0.20em 0.5em;
-   text-decoration: none;
-   color: #FFF;
-   background: #808080;
-   border-radius: 10px;
-   box-shadow: inset 0 3px 0 rgba(255,255,255,0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.05);
-   font-weight: bold;
-   border: solid 2px #000000	;
-   }
-   .btn-square:active {
-   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-   }
-   div.center {
-   text-align : center ;
-   }
-   div.left {
-   text-align : left ;
-   }
-   table.result {
-   margin-left:auto;
-   margin-right:auto;
-   text-align: center;
-   font-size: 14px;
-   border-collapse: collapse;
-   width: 900px;
-   }
-   th.result {
-   color: white;
-   background-color: #808080;
-   border: solid 5px #000000 ;
-   }
-   td.result {
-   background-color: white;
-   border: solid 5px #000000 ; 
-  }
-   ul.columns1 {
-   font-family: "serif";
-   border-radius: 10px;
-   background-color: #ffffff;
-   column-count: 1;
-   column-gap: 50px;
-   list-style: none;
-   margin: 5px;
-   padding: 10px;
-   font-size: 18px;
-   text-align : left;
-   column-rule: 2px dashed black;
-   }
-hr {
-  border: 2px dashed black;
-  width: 780px
+body {
+     background-color: #afafaf;
 }
-        a:link {color:#000000;}
-        a:visited{color:#008000;} 
-        a:hover{color:#0000ff;} 
-        a:active{color:#ffff00;} 
+ .title {
+     text-decoration: underline;
+     margin: 10px;
+     text-align: left;
+     font-size: 30px;
+     text-shadow: 100px 10px 20px #808080;
+}
+ .word {
+     text-decoration: underline;
+     margin: 20px;
+     text-align: center;
+     font-size: 30px;
+     text-shadow: 100px 10px 20px #808080;
+}
+ p {
+     margin: 50px;
+}
+ input.btn-square {
+     font-size: 30px;
+     position: relative;
+     display: inline-block;
+     padding: 0.20em 0.5em;
+     text-decoration: none;
+     color: #FFF;
+     background: #808080;
+     border-radius: 10px;
+     box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+     font-weight: bold;
+     border: solid 2px #000000;
+}
+ .btn-square:active {
+     box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+ .center {
+     text-align: center;
+}
+ .left {
+     text-align: left;
+}
+ table.result {
+     margin-left: auto;
+     margin-right: auto;
+     text-align: center;
+     font-size: 14px;
+     border-collapse: collapse;
+     width: 900px;
+}
+ th.result {
+     color: white;
+     background-color: #808080;
+     border: solid 5px #000000;
+}
+ td.result {
+     background-color: white;
+     border: solid 5px #000000;
+}
+ .columns1 {
+     font-family: "serif";
+     border-radius: 10px;
+     background-color: #ffffff;
+     column-count: 1;
+     column-gap: 50px;
+     list-style: none;
+     margin: 5px;
+     padding: 10px;
+     font-size: 18px;
+     text-align: left;
+     column-rule: 2px dashed black;
+}
+ img {
+     width: 180px;
+}
+ hr {
+     border: 2px dashed black;
+     width: 780px;
+}
+ a:link {
+     color: #000000;
+}
+ a:visited {
+     color: #008000;
+}
+ a:hover {
+     color: #0000ff;
+}
+ a:active {
+     color: #ffff00;
+}

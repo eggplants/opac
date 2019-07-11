@@ -43,7 +43,7 @@ Content-type: text/html
       <link rel="stylesheet" type="text/css" href="../css/search.css">
    </head>
    <body>
-      <a href="../index.html"><img src="../img/logo.png" width="180px"/></a><hr>
+      <a href="../index.html"><img src="../img/logo.png" alt="logo"/></a><hr>
       EOS
       puts "<br><h1 class='word'>[<span style=' ;color:#ff0000;'> #{search_display}</span>]の検索結果:<span style='color:#ff0000;'>#{hit_num}</span>件</h1>" if hit_num==0
       head=<<EOS
@@ -64,11 +64,13 @@ Content-type: text/html
       </form>
       <div class="center">#{create_paging_link(hit_num,cgi_values)}</div>
       <div class="center"><table class="result" frame="border">
-        　　<th class="result">タイトル:[TITLE]</th>
+        <tr>
+            <th class="result">タイトル:[TITLE]</th>
             <th class="result">著者標目1:[AUTHHEAD1]</th>
             <th class="result">著者標目2:[AUTHHEAD2]</th>
             <th class="result">出版社:[PUB]</th>
             <th class="result">出版年:[PUBDATE]</th>
+        </tr>
 EOS
 puts head if hit_num!=0
 puts create_table_html(data,cgi_values)

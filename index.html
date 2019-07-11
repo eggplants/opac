@@ -37,165 +37,170 @@
          <input type="hidden" name="p" value="0">
          <div class="center"><input class="btn-square" type="submit" value="検索する"></div>
       </form>
-      <br><br><div class="left">
-      <hr>
-      <details>
-         <summary>詳細検索</summary>
-         <form action="cgi/search.cgi" method="GET">
-            <ul class="columns1">
-               <li>
-                  <input type="radio" name="andor" value="and" checked>AND検索
-                  　<input type="radio" name="andor" value="or" >OR検索
-                  <table>
-                     <tbody>
-                        <tr>
-                           <td>NBC:</td>
-                           <td><input type="text" name="nbc" value="" placeholder="全国書誌番号"></td>
-                        </tr>
-                        <tr>
-                           <td>TITLE:</td>
-                           <td><input type="text" name="title" value="" placeholder="タイトル"></td>
-                        </tr>
-                        <tr>
-                           <td>AUTH:</td>
-                           <td><input type="text" name="auth" value="" placeholder="著者"></td>
-                        </tr>
-                        <tr>
-                           <td>ED:</td>
-                           <td><input type="text" name="ed" value="" placeholder="版"></td>
-                        </tr>
-                        <tr>
-                           <td>PUB:</td>
-                           <td><input type="text" name="pub" value="" placeholder="出版者"></td>
-                        </tr>
-                        <tr>
-                           <td>PUBDATE:</td>
-                           <td><input type="text" name="pubdate" value="" placeholder="出版年"></td>
-                        </tr>
-                        <tr>
-                           <td>PHYS:</td>
-                           <td><input type="text" name="phys" value="" placeholder="形態"></td>
-                        </tr>
-                        <tr>
-                           <td>NOTE:</td>
-                           <td><input type="text" name="note" value="" placeholder="注記"></td>
-                        </tr>
-                        <tr>
-                           <td>SERIES:</td>
-                           <td><input type="text" name="series" value="" placeholder="シリーズ"></td>
-                        </tr>
-                        <tr>
-                           <td>ISBN:</td>
-                           <td><input type="text" name="isbn" value="" placeholder="ISBN番号"></td>
-                        </tr>
-                        <tr>
-                           <td>TITLEHEADING:</td>
-                           <td><input type="text" name="titleheading" value="" placeholder="タイトルの読み"></td>
-                        </tr>
-                        <tr>
-                           <td>AUTHORHEADING:</td>
-                           <td><input type="text" name="authorheading" value="" placeholder="著者の読み"></td>
-                        </tr>
-                        <tr>
-                           <td>HOLDINGSRECORD:</td>
-                           <td><input type="text" name="holdingsrecord" value="" placeholder="個別資料の識別番号"></td>
-                        </tr>
-                        <tr>
-                           <td>HOLDINGPHYS:</td>
-                           <td><input type="text" name="holdingphys" value="" placeholder="所在棚名"></td>
-                        </tr>
-                        <tr>
-                           <td>HOLDINGLOC:</td>
-                           <td><input type="text" name="holdingloc" value="" placeholder="分類番号"></td>
-                        </tr>
-                     </tbody>
-                  </table>
-                  <br><input type="hidden" name="p" value="0">
-                  <div class="center">
-                     <input type="text" name="ps" value="" list="case-numbers2" placeholder="1ページの表示件数:" style="font-size:25px;">
-                     <datalist id="case-numbers2">
-                        <option value="20">けっこう少ない</option>
-                        <option value="50">少ない</option>
-                        <option value="100">ちょっと少ない</option>
-                        <option value="200">ちょうどいい</option>
-                        <option value="500">ちょっと多い</option>
-                        <option value="1000">多い</option>
-                        <option value="5000">多い</option>
-                     </datalist>
-                  </div>
-                  <div class="center"><br>
-                     <input class="btn-square" type="submit" value="検索する">
-                  </div>
-            </ul>
-         </form>
-      </details>
-    <hr>
-      <details>
-      <summary>各レコードの説明</summary>
-      <ul class="columns2">
-         <li>NBC:全国書誌番号ㅤTITLE:題名
-            AUTH:著者ㅤED:版<br>
-            PUB:出版者　PUBDATE:出版年 PHYS:形態<br>
-            NOTE:注記 SERIES:シリーズㅤISBN:ISBN番号<br>
-            TITLEHEADING:題名の読み<br>
-            AUTHORHEADING:著者の読み<br>
-            HOLDINGSRECORD:資料番号<br>
-            HOLDINGPHYS:所在棚名<br>
-            HOLDINGLOC:分類番号<br>
-         </li>
-      </ul>
-    </details>
-    <hr>
-    <details><summary>使用例</summary>
-    <ul class="columns2">
-       <li><label>①AND検索するとき </label></li>
-       <li><label>ㅤ- 花子さん だいすき[スペース全/半可]か、<br>ㅤ- 花子さん and[AND可] だいすき<br></label></li>
-       <li><label>ㅤ⇒全フィールドAND検索<br></label></li>
-       <li><label>②OR検索するとき </label></li>
-       <li><label>ㅤ- 花子さん or[OR可] 愛してる </label></li>
-       <li><label>ㅤ⇒全フィールドOR検索 </label></li>
-       <li><label>③フィールド指定検索するとき </label></li>
-       <li><label>ㅤ- ED:第4版 PUB:大阪 </label></li>
-       <li><label>ㅤ⇒ED[第4版],
-          PUB[大阪]をAND検索 <br>
-          * キーワードは部分文字列にマッチ <br>
-          * [あ and い or う] に対応<br>
-          * 解釈は[((あ and い) or う)] <br>
-          * ["],[']は検索出来ない(エスケープ) </label>
-       </li>
-    </ul>
-  </details>
-      <hr>
-      <details><summary>作者</summary>
-         <br><br><div class="center"><a href="/img/selfiebrink.gif"><img src="img/selfiebrink.gif" width="500" alt="sei" border="50"></a><br>▲自画像です.<br></div>         
-	<ul class="columns2">
-            <li>
-               作者情報
-               <ul>
-                  <li>春名(haruna)</li>
-                  <li>筑波大学情報学群 2年次(2019年現在)</li>
-                  <li>ハゲです. (ハゲなので)</li>
-                  <li>Ruby/Python/AWK/Vala/PHP(今回はじめてつかった)</li>
+      <br><br>
+      <div class="left">
+         <hr>
+         <details>
+            <summary>詳細検索</summary>
+            <form action="cgi/search.cgi" method="GET">
+               <ul class="columns1">
                   <li>
-                     ゴミです. (ゴミなので)
-                     <ul>
-                        <li><a href="https://github.com/eggplants">GitHub/eggplants</a></li>
-                        <li><a href="https://qiita.com/eggplants">Qiita/eggplants</a></li>
-                        <li><a href="https://twitter.com/egpl0">Twitter/egpl0</a></li>
-                        <li><a href="https://atcoder.jp/users/eggplants">AtCoder/eggplants</a></li>
-                     </ul>
-                  </li>
+                     <input type="radio" name="andor" value="and" checked>AND検索
+                     　<input type="radio" name="andor" value="or" >OR検索
+                     <table>
+                        <tbody>
+                           <tr>
+                              <td>NBC:</td>
+                              <td><input type="text" name="nbc" value="" placeholder="全国書誌番号"></td>
+                           </tr>
+                           <tr>
+                              <td>TITLE:</td>
+                              <td><input type="text" name="title" value="" placeholder="タイトル"></td>
+                           </tr>
+                           <tr>
+                              <td>AUTH:</td>
+                              <td><input type="text" name="auth" value="" placeholder="著者"></td>
+                           </tr>
+                           <tr>
+                              <td>ED:</td>
+                              <td><input type="text" name="ed" value="" placeholder="版"></td>
+                           </tr>
+                           <tr>
+                              <td>PUB:</td>
+                              <td><input type="text" name="pub" value="" placeholder="出版者"></td>
+                           </tr>
+                           <tr>
+                              <td>PUBDATE:</td>
+                              <td><input type="text" name="pubdate" value="" placeholder="出版年"></td>
+                           </tr>
+                           <tr>
+                              <td>PHYS:</td>
+                              <td><input type="text" name="phys" value="" placeholder="形態"></td>
+                           </tr>
+                           <tr>
+                              <td>NOTE:</td>
+                              <td><input type="text" name="note" value="" placeholder="注記"></td>
+                           </tr>
+                           <tr>
+                              <td>SERIES:</td>
+                              <td><input type="text" name="series" value="" placeholder="シリーズ"></td>
+                           </tr>
+                           <tr>
+                              <td>ISBN:</td>
+                              <td><input type="text" name="isbn" value="" placeholder="ISBN番号"></td>
+                           </tr>
+                           <tr>
+                              <td>TITLEHEADING:</td>
+                              <td><input type="text" name="titleheading" value="" placeholder="タイトルの読み"></td>
+                           </tr>
+                           <tr>
+                              <td>AUTHORHEADING:</td>
+                              <td><input type="text" name="authorheading" value="" placeholder="著者の読み"></td>
+                           </tr>
+                           <tr>
+                              <td>HOLDINGSRECORD:</td>
+                              <td><input type="text" name="holdingsrecord" value="" placeholder="個別資料の識別番号"></td>
+                           </tr>
+                           <tr>
+                              <td>HOLDINGPHYS:</td>
+                              <td><input type="text" name="holdingphys" value="" placeholder="所在棚名"></td>
+                           </tr>
+                           <tr>
+                              <td>HOLDINGLOC:</td>
+                              <td><input type="text" name="holdingloc" value="" placeholder="分類番号"></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <br><input type="hidden" name="p" value="0">
+                     <div class="center">
+                        <input type="text" name="ps" value="" list="case-numbers2" placeholder="1ページの表示件数:" style="font-size:25px;">
+                        <datalist id="case-numbers2">
+                           <option value="20">けっこう少ない</option>
+                           <option value="50">少ない</option>
+                           <option value="100">ちょっと少ない</option>
+                           <option value="200">ちょうどいい</option>
+                           <option value="500">ちょっと多い</option>
+                           <option value="1000">多い</option>
+                           <option value="5000">多い</option>
+                        </datalist>
+                     </div>
+                     <div class="center"><br>
+                        <input class="btn-square" type="submit" value="検索する">
+                     </div>
                </ul>
-            </li>
-         </ul>
-      </details>
-</div>
+            </form>
+         </details>
+         <hr>
+         <details>
+            <summary>各レコードの説明</summary>
+            <ul class="columns2">
+               <li>NBC:全国書誌番号ㅤTITLE:題名
+                  AUTH:著者ㅤED:版<br>
+                  PUB:出版者　PUBDATE:出版年 PHYS:形態<br>
+                  NOTE:注記 SERIES:シリーズㅤISBN:ISBN番号<br>
+                  TITLEHEADING:題名の読み<br>
+                  AUTHORHEADING:著者の読み<br>
+                  HOLDINGSRECORD:資料番号<br>
+                  HOLDINGPHYS:所在棚名<br>
+                  HOLDINGLOC:分類番号<br>
+               </li>
+            </ul>
+         </details>
+         <hr>
+         <details>
+            <summary>使用例</summary>
+            <ul class="columns2">
+               <li><label>①AND検索するとき </label></li>
+               <li><label>ㅤ- 花子さん だいすき[スペース全/半可]か、<br>ㅤ- 花子さん and[AND可] だいすき<br></label></li>
+               <li><label>ㅤ⇒全フィールドAND検索<br></label></li>
+               <li><label>②OR検索するとき </label></li>
+               <li><label>ㅤ- 花子さん or[OR可] 愛してる </label></li>
+               <li><label>ㅤ⇒全フィールドOR検索 </label></li>
+               <li><label>③フィールド指定検索するとき </label></li>
+               <li><label>ㅤ- ED:第4版 PUB:大阪 </label></li>
+               <li><label>ㅤ⇒ED[第4版],
+                  PUB[大阪]をAND検索 <br>
+                  * キーワードは部分文字列にマッチ <br>
+                  * [あ and い or う] に対応<br>
+                  * 解釈は[((あ and い) or う)] <br>
+                  * ["],[']は検索出来ない(エスケープ) </label>
+               </li>
+            </ul>
+         </details>
+         <hr>
+         <details>
+            <summary>作者</summary>
+            <br><br>
+            <div class="center"><a href="/img/selfiebrink.gif"><img src="img/selfiebrink.gif" alt="sei"></a><br>▲自画像です.<br></div>
+            <ul class="columns2">
+               <li>
+                  作者情報
+                  <ul>
+                     <li>春名(haruna)</li>
+                     <li>筑波大学情報学群 2年次(2019年現在)</li>
+                     <li>ハゲです. (ハゲなので)</li>
+                     <li>Ruby/Python/AWK/Vala/PHP(今回はじめてつかった)</li>
+                     <li>
+                        ゴミです. (ゴミなので)
+                        <ul>
+                           <li><a href="https://github.com/eggplants">GitHub/eggplants</a></li>
+                           <li><a href="https://qiita.com/eggplants">Qiita/eggplants</a></li>
+                           <li><a href="https://twitter.com/egpl0">Twitter/egpl0</a></li>
+                           <li><a href="https://atcoder.jp/users/eggplants">AtCoder/eggplants</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+               </li>
+            </ul>
+         </details>
+      </div>
       <hr>
       <br>
-      <ul class="column1">
-      <div class="center">このページは,春AB必修科目「<a href="http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I">知識情報演習I</a>」の演習課題です.(Chrome/Firefox対応.)</div>
-      <div class="center">Copyright © 2019 春名航亨(<a href="https://www.u.tsukuba.ac.jp/~s1811528/">201811528</a>) All Rights Reserved.</div>
-      </ul>
-	<br><br><a href="report.html">report</a><a href="yet_list.html" style="text-align:left;">.</a>
+      <div class="center">
+         <ul class="column1">
+            このページは,春AB必修科目「<a href="http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I">知識情報演習I</a>」の演習課題です.(Chrome/Firefox対応.)
+            Copyright © 2019 春名航亨(<a href="https://www.u.tsukuba.ac.jp/~s1811528/">201811528</a>) All Rights Reserved. here is:<a href="report.html">report</a><a href="yet_list.html" style="text-align:left;">.</a>
+         </ul>
+      </div>
    </body>
 </html>
