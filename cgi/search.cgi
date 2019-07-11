@@ -73,7 +73,7 @@ EOS
 puts head if hit_num!=0
 puts create_table_html(data,cgi_values)
 puts "</table></div>" if hit_num!=0
-puts '<br><div class="center"><button type="button" onclick="location.href=\'../index.html\'" style="font-size:20px;width:200px;height:50px">検索画面へ戻る</button></div>' if hit_num!=0
+puts '<br><div class="center"><button type="button" onclick="location.href=\'../index.html\'" style="font-size:20px;width:200px;height:50px">検索画面へ戻る</button></div>'
 puts <<-EOS
 	<br><hr>
       <br>
