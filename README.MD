@@ -2,7 +2,7 @@
 - このリポジトリは…
 - 知識情報演習Ⅰの課題「OPACの構築」で作成した課題.
 - 授業内で最優秀賞として表彰されました.(2019年度)
-     - (リンク)[https://klis.tsukuba.ac.jp/1158.html]
+     - [リンク](https://klis.tsukuba.ac.jp/1158.html)
 # はじめに
 
 このページは,知識情報・図書館学類春ABモジュール開設「[**知識情報演習Ⅰ**](http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I)」の課題「OPACの構築」についてのレポートです.
