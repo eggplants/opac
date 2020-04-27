@@ -288,4 +288,4 @@ CREATE TABLE bibdata(
 
 ## Webサイトのgithubでの差分管理
 
-ㅤ(eggplants/opac)[https://github.com/eggplants/opac] として差分管理を行いました.
+ㅤ[eggplants/opac](https://github.com/eggplants/opac) として差分管理を行いました.
