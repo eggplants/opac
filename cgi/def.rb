@@ -5,15 +5,15 @@ require 'json'
 
 #検索語の受け取り整形
 def makewords(cgi)
-  word="NBC:#{cgi["nbc"]} TITLE:#{cgi["title"]} AUTH:#{cgi["auth"]}\s
-ED:#{cgi["ed"]} PUB:#{cgi["pub"]} PUBDATE:#{cgi["pubdate"]}\s
-PHYS:#{cgi["phys"]} NOTE:#{cgi["note"]} SERIES:#{cgi["series"]}\s
-ISBN:#{cgi["isbn"]} TITLEHEADING:#{cgi["titleheading"]}\s
-AUTHORHEADING:#{cgi["authorheading"]}\s
-HOLDINGSRECORD:#{cgi["holdingsrecord"]} HOLDINGPHYS:#{cgi["holdingphys"]}\s
-HOLDINGLOC:#{cgi["holdingloc"]} #{cgi["search"]}"
-  words=word.gsub(/[\r\n]/,"").gsub(/<[a-zA-Z]+>|\"|\'/,"").split(/[\+\s 　]+/).
-         delete_if{|i|i=~/[aA][nN][dD]/||i=~/^[A-Z]+:$/||i==""}
+  word="NBC:#{cgi["nbc"]} TITLE:#{cgi["title"]} AUTH:#{cgi["auth"]} " +
+       "ED:#{cgi["ed"]} PUB:#{cgi["pub"]} PUBDATE:#{cgi["pubdate"]} " +
+       "PHYS:#{cgi["phys"]} NOTE:#{cgi["note"]} SERIES:#{cgi["series"]} " +
+       "ISBN:#{cgi["isbn"]} TITLEHEADING:#{cgi["titleheading"]} " +
+       "AUTHORHEADING:#{cgi["authorheading"]} " +
+       "HOLDINGSRECORD:#{cgi["holdingsrecord"]} HOLDINGPHYS:#{cgi["holdingphys"]} " +
+       "HOLDINGLOC:#{cgi["holdingloc"]} #{cgi["search"]} "
+  words=word.gsub(/[\r\n]/,"").gsub(/<[a-zA-Z]+>|\"|\'/,"").split(/[\+\s 　]+/)
+            .delete_if{|i|i=~/[aA][nN][dD]/||i=~/^[A-Z]+:$/||i==""}
   if cgi["andor"]=="or"
     (words.size-1).times{|i|words.insert(i*2+1, "OR")}
   end
