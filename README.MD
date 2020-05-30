@@ -1,5 +1,8 @@
 # 知識情報演習I レポート課題 201811528 春名航亨(水曜組)
-
+- このリポジトリは…
+    - 知識情報演習Ⅰの課題「OPACの構築」で作成した課題.
+    - 授業内で最優秀賞として表彰されました.(2019年度)
+      - [リンク](https://klis.tsukuba.ac.jp/1158.html)
 # はじめに
 
 このページは,知識情報・図書館学類春ABモジュール開設「[**知識情報演習Ⅰ**](http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I)」の課題「OPACの構築」についてのレポートです.
@@ -285,4 +288,4 @@ CREATE TABLE bibdata(
 
 ## Webサイトのgithubでの差分管理
 
-ㅤ(eggplants/opac)[https://github.com/eggplants/opac] として差分管理を行いました.
+ㅤ[eggplants/opac](https://github.com/eggplants/opac) として差分管理を行いました.
