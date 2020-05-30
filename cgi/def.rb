@@ -206,9 +206,9 @@ def bibimage(isbn13,per)
       bibhash[0]['onix']['CollateralDetail']['SupportingResource'][0]['ResourceVersion'][0]['ResourceLink']+
       '" width="200" height="287" alt="OpenDB API"/>'
     rescue NoMethodError#書誌データがあるが書影がないとき
-      img='<img src="../img/notfound.png" width="200" height="287" alt="404"/>'
+      img='<img src="https://1.bp.blogspot.com/-d3vDLBoPktU/WvQHWMBRhII/AAAAAAABL6E/Grg-XGzr9jEODAxkRcbqIXu-mFA9gTp3wCLcBGAs/s800/internet_404_page_not_found.png" width="500" height="287" alt="404"/>'
     end
   else
-    img='<img src="../img/notfound.png" width="200" height="287" alt="404"/>'
+    img='<img src="https://1.bp.blogspot.com/-d3vDLBoPktU/WvQHWMBRhII/AAAAAAABL6E/Grg-XGzr9jEODAxkRcbqIXu-mFA9gTp3wCLcBGAs/s800/internet_404_page_not_found.png" width="200" height="287" alt="404"/>'
   end
 end
