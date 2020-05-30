@@ -40,14 +40,14 @@ Content-type: text/html
    <body>
       <a href="../index.html"><img src="../img/logo.png" width="180px"/></a><hr>
       <h1 class="word">
-[<span style="color:#ff0000;">#{row[2].gsub(/""/,'"')}<br>< #{key} ></span>]の詳細表示</h1>
+[<span style="color:#ff0000;">#{row[2].gsub(/""/,'"')}<br>\< #{key} \></span>]の詳細表示</h1>
       <div class="center">
          <button type="button" onclick="history.back()" style="font-size:20px;width:242px;height:50px">検索結果一覧へ戻る</button>
          <button type="button" onclick="window.location.href='../index.html'" style="font-size:20px;width:242px;height:50px">検索画面へ戻る</button></div>
 <div class="center"><a class="btn-twitter" href="https://twitter.com/share?url=https://cgi.u.tsukuba.ac.jp/~s1811528/opac/cgi/accurate.cgi?NBC=#{key}&text=[#{row[2].gsub(/""/,'"')}]の詳細書誌情報%20%23SimpleOPAC%20(筑波大学内限定アクセス)" rel="nofollow" target="_blank">
 <span class="btn-twitter__square"><i class="fab fa-twitter"></i></span>Twitterでシェアする</a>
       </div>
-      
+
 	<table>
          <tbody>
             <tr>
@@ -60,13 +60,13 @@ Content-type: text/html
             </tr>
 <tr>
 	    <td>検索:[Amazon,Rakuten,CiNii Booksなど]</td>
-           <td><a href="https://www.amazon.co.jp/s?i=stripbooks&rh=p_66%3A#{isbn13}&rh=p_28%3A#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/amazon.png" width="100px"/></a>
-              <a href="https://books.rakuten.co.jp/search?g=001&isbnJan=#{isbn13}&title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/rakuten.png" width="140px"/></a>
-              <a href="https://ci.nii.ac.jp/books/search?advanced=true&isbn=#{isbn13}&title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/cinii.png" width="150px"/></a>
-        <a href="https://iss.ndl.go.jp/books?search_mode=advanced&rft.isbn=#{isbn13}&rft.title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/ndl.png" width="150px"/></a>
-              <a href="https://www.tulips.tsukuba.ac.jp/search/?isbn=#{isbn13}&title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/tulips.png" width="150px"/></a>
- <a href="https://www.google.co.jp/search?hl=ja&tbo=p&tbm=bks&q=isbn:#{isbn13}+intitle:#{row[2].gsub(/""/,'"').gsub(/\./," ")}&num=10"><img src="../img/google.png" width="100px"/></a>
-              <a href="https://www.worldcat.org/search?q=bn%3A#{isbn13}+ti%3A#{row[2].gsub(/""/,'"').gsub(/\./," ")}&num=10"><img src="../img/worldcat.png" width="150px"/></a></td>
+           <td><a href="https://www.amazon.co.jp/s?i=stripbooks&rh=p_66%3A#{isbn13}&rh=p_28%3A#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/amazon.png" width="100px" alt="amazon"/></a>
+              <a href="https://books.rakuten.co.jp/search?g=001&isbnJan=#{isbn13}&title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/rakuten.png" width="140px" alt="rakuten"/></a>
+              <a href="https://ci.nii.ac.jp/books/search?advanced=true&isbn=#{isbn13}&title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/cinii.png" width="150px" alt="cinii"/></a>
+        <a href="https://iss.ndl.go.jp/books?search_mode=advanced&rft.isbn=#{isbn13}&rft.title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/ndl.png" width="150px" alt="ndl"/></a>
+              <a href="https://www.tulips.tsukuba.ac.jp/search/?isbn=#{isbn13}&title=#{row[2].gsub(/""/,'"').gsub(/\./," ")}"><img src="../img/tulips.png" width="150px" alt="tulips"/></a>
+ <a href="https://www.google.co.jp/search?hl=ja&tbo=p&tbm=bks&q=isbn:#{isbn13}+intitle:#{row[2].gsub(/""/,'"').gsub(/\./," ")}&num=10"><img src="../img/google.png" width="100px" alt="google"/></a>
+              <a href="https://www.worldcat.org/search?q=bn%3A#{isbn13}+ti%3A#{row[2].gsub(/""/,'"').gsub(/\./," ")}&num=10"><img src="../img/worldcat.png" width="150px" alt="worldcat"/></a></td>
 </tr>
             <tr>
                <td>タイトル:<br>[TITLE]</td>
@@ -130,7 +130,7 @@ Content-type: text/html
             </tr>
             <tr>
                <td>注記:[NOTE]</td>
-               <td><details>#{row[9].gsub(/＞/,",")} </details></td>
+               <td><details><summary>詳細</summary>#{row[9].gsub(/＞/,",")} </details></td>
             </tr>
         </tbody>
       </table>
