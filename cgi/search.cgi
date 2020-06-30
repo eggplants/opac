@@ -78,8 +78,15 @@ puts "</table></div>" if hit_num!=0
 puts '<br><div class="center"><button type="button" onclick="location.href=\'../index.html\'" style="font-size:20px;width:200px;height:50px">検索画面へ戻る</button></div>'
 puts <<-EOS
 	<br><hr>
-      <br>
-      <div class="center">このページは,春AB必修科目「<a href="http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I">知識情報演習I</a>」の演習課題です.(Chrome/Firefox対応.)</div>
-      <div class="center">Copyright © 2019 春名航亨(<a href="https://www.u.tsukuba.ac.jp/~s1811528/">201811528</a>) All Rights Reserved.</div>
-      <br><br></body></html>
+      <div class="center">
+         <ul class="column1">
+            このページは,春AB必修科目「<a href="http://klis.tsukuba.ac.jp/klib/index.php?KIRL-I">知識情報演習I</a>」の演習課題です.(Chrome/Firefox対応.)<br>
+            Copyright © 2019 春名航亨(<a href="https://www.u.tsukuba.ac.jp/~s1811528/">201811528</a>) All Rights Reserved. Here is:
+            <a href="report.html">Report</a>
+            and
+            <a href="https://github.com/eggplants/opac">Repository</a><a href="yet_list.html" style="text-align:left;">.</a>
+         </ul>
+      </div>
+   </body>
+</html>
 EOS
